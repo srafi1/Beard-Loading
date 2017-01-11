@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MathString {
 
-
+    private static final String numbers = "1234567890.~";
 
     public static String removeWhitespace(String exp){
 	if(exp.indexOf(" ") != -1){
@@ -149,7 +149,6 @@ public class MathString {
     }
 
     public static String addLtoR(String exp){
-	String numbers = "1234567890.~";
 	if(exp.indexOf("+") != -1 || exp.indexOf("-") != -1){
 	    int opIndex = Math.min(exp.indexOf("+"),exp.indexOf("-"));
 	    if (opIndex == -1)
@@ -214,7 +213,6 @@ public class MathString {
 
 
     public static String multiplyLtoR(String exp){
-	String numbers = "1234567890.~";
 	if(exp.indexOf("*") != -1 || exp.indexOf("/") != -1){
 	    int opIndex = Math.min(exp.indexOf("*"),exp.indexOf("/"));
 	    if (opIndex == -1)
@@ -277,7 +275,6 @@ public class MathString {
     }//end multiplyLtoR
 
     public static String powerLtoR(String exp){
-	String numbers = "1234567890.~";
 	if(exp.indexOf("^") != -1){
 	    int opIndex = exp.indexOf("^");
 
@@ -347,7 +344,6 @@ public class MathString {
 		openParen = nextParen;
 		nextParen = exp.substring(openParen+1).indexOf("(");
 	    }
-	    String numbers = "1234567890.";
 	    String parens = exp.substring(openParen, closeParen+1);
 	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
 		exp = exp.replace(parens, "*"+parens);
@@ -374,12 +370,6 @@ public class MathString {
 	//System.out.println(exp);
 	exp = addLtoR(exp);
 	return exp;
-    }
-
-    public static String parens(String exp){
-	String bkparen = exp.indexOf(")");
-
-
     }
 
     public static void main (String[] args){
