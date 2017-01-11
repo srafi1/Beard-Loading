@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class MathString {
 
 
@@ -212,7 +214,7 @@ public class MathString {
 
 
     public static String multiplyLtoR(String exp){
-	String numbers = "1234567890.";
+	String numbers = "1234567890.~";
 	if(exp.indexOf("*") != -1 || exp.indexOf("/") != -1){
 	    int opIndex = Math.min(exp.indexOf("*"),exp.indexOf("/"));
 	    if (opIndex == -1)
@@ -275,7 +277,7 @@ public class MathString {
     }//end multiplyLtoR
 
     public static String powerLtoR(String exp){
-	String numbers = "1234567890.";
+	String numbers = "1234567890.~";
 	if(exp.indexOf("^") != -1){
 	    int opIndex = exp.indexOf("^");
 
@@ -336,7 +338,9 @@ public class MathString {
 	exp = removeWhitespace(exp);
 	//System.out.println(exp);
 	exp = powerLtoR(exp);
+	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
+	//System.out.println(exp);
 	exp = addLtoR(exp);
 	return exp;
     }
@@ -345,21 +349,23 @@ public class MathString {
 	
 	/*	System.out.println(simpleAdd("6.18+~7.27"));
 	System.out.println(simpleSubtract("6.18-7.28"));
-	System.out.println(simpleMultiply("6.18*7.28"));
-	System.out.println(simpleDivide("6.18/7.28"));
+	System.out.println(simpleMultiply("6.18*~7.28"));
+	System.out.println(simpleDivide("6.18/~7.28"));
 	System.out.println(simplePower("6^2"));
       	System.out.println(addLtoR("3+3+4"));
 	System.out.println(multiplyLtoR("2*3*3*5/3"));
 	System.out.println(powerLtoR("2^2+4^2"));
 	System.out.println(pemdas("3^2+3*2-6/2"));
-	System.out.println(pemdas("3^2 + 3*2      - 6 / 2"));
-	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
+	
+        System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
+       	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
 	*/
 
 	
 	for(String s : args){
 	    System.out.println(MathString.pemdas(s));
 	}
+	
 	
     }
 
