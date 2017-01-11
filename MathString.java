@@ -12,48 +12,142 @@ public class MathString {
 	}
     }
 
+    public static String negativeNotate(String negNum){
+	if(negNum.substring(0,1).equals( "-"))
+	    return "~" + negNum.substring(1);
+	else
+	    return negNum;
+    }
+
     public static String simpleAdd(String exp){
+	double val1;
+	double val2;
 	int index = exp.indexOf("+");
-	double val1 = Double.parseDouble(exp.substring(index + 1));
-	double val2 = Double.parseDouble(exp.substring(0,index));
-	return "" + (val1 + val2);
+	String arg1 = (exp.substring(index + 1));
+	String arg2 = (exp.substring(0,index));
+	//	System.out.println(arg1);
+	//System.out.println(arg2);
+	if (arg1.substring(0,1).equals("~")){
+	    val1 = -1 * Double.parseDouble(arg1.substring(1));
+	}
+	else{
+	    val1 = Double.parseDouble(arg1);
+	}
+	
+	if (arg2.substring(0,1).equals("~")){
+	    val2 = -1 * Double.parseDouble(arg2.substring(1));
+	}
+	else{
+	    val2 = Double.parseDouble(arg2);
+	}
+	return negativeNotate("" + (val1 + val2));
 	
     }
     
     public static String simpleSubtract(String exp){
+	double val1;
+	double val2;
 	int index = exp.indexOf("-");
-	double val1 = Double.parseDouble(exp.substring(index + 1));
-	double val2 = Double.parseDouble(exp.substring(0,index));
-	return "" + (val2 - val1);
+	String arg1 = (exp.substring(index + 1));
+	String arg2 = (exp.substring(0,index));
+	//System.out.println(arg1);
+	//System.out.println(arg2);
+	if (arg1.substring(0,1).equals("~")){
+	    val1 = -1 * Double.parseDouble(arg1.substring(1));
+	}
+	else{
+	    val1 = Double.parseDouble(arg1);
+	}
+	
+	if (arg2.substring(0,1).equals("~")){
+	    val2 = -1 * Double.parseDouble(arg2.substring(1));
+	}
+	else{
+	    val2 = Double.parseDouble(arg2);
+	}
+	return negativeNotate("" + (val2 - val1));
+	
 	
     }
 
     public static String simpleMultiply(String exp){
+	double val1;
+	double val2;
 	int index = exp.indexOf("*");
-	double val1 = Double.parseDouble(exp.substring(index + 1));
-	double val2 = Double.parseDouble(exp.substring(0,index));
-	return "" + (val1 * val2);
+	String arg1 = (exp.substring(index + 1));
+	String arg2 = (exp.substring(0,index));
+	//System.out.println(arg1);
+	//System.out.println(arg2);
+	if (arg1.substring(0,1).equals("~")){
+	    val1 = -1 * Double.parseDouble(arg1.substring(1));
+	}
+	else{
+	    val1 = Double.parseDouble(arg1);
+	}
+	
+	if (arg2.substring(0,1).equals("~")){
+	    val2 = -1 * Double.parseDouble(arg2.substring(1));
+	}
+	else{
+	    val2 = Double.parseDouble(arg2);
+	}
+	return negativeNotate("" + (val1 * val2));
+	
 	
     }
     
     public static String simpleDivide(String exp){
+	double val1;
+	double val2;
 	int index = exp.indexOf("/");
-	double val1 = Double.parseDouble(exp.substring(index + 1));
-	double val2 = Double.parseDouble(exp.substring(0,index));
-	return "" + (val2/ val1);
+	String arg1 = (exp.substring(index + 1));
+	String arg2 = (exp.substring(0,index));
+	//System.out.println(arg1);
+	//System.out.println(arg2);
+	if (arg1.substring(0,1).equals("~")){
+	    val1 = -1 * Double.parseDouble(arg1.substring(1));
+	}
+	else{
+	    val1 = Double.parseDouble(arg1);
+	}
+	
+	if (arg2.substring(0,1).equals("~")){
+	    val2 = -1 * Double.parseDouble(arg2.substring(1));
+	}
+	else{
+	    val2 = Double.parseDouble(arg2);
+	}
+	return negativeNotate("" + (val2 / val1));
 	
     }
 
     public static String simplePower(String exp){
+	double val1;
+	double val2;
 	int index = exp.indexOf("^");
-	double val1 = Double.parseDouble(exp.substring(index + 1));
-	double val2 = Double.parseDouble(exp.substring(0,index));
-	return "" + Math.pow(val2, val1);
+	String arg1 = (exp.substring(index + 1));
+	String arg2 = (exp.substring(0,index));
+	//System.out.println(arg1);
+	//System.out.println(arg2);
+	if (arg1.substring(0,1).equals("~")){
+	    val1 = -1 * Double.parseDouble(arg1.substring(1));
+	}
+	else{
+	    val1 = Double.parseDouble(arg1);
+	}
+	
+	if (arg2.substring(0,1).equals("~")){
+	    val2 = -1 * Double.parseDouble(arg2.substring(1));
+	}
+	else{
+	    val2 = Double.parseDouble(arg2);
+	}
+	return negativeNotate("" + Math.pow(val2,val1));
 	
     }
 
     public static String addLtoR(String exp){
-	String numbers = "1234567890.";
+	String numbers = "1234567890.~";
 	if(exp.indexOf("+") != -1 || exp.indexOf("-") != -1){
 	    int opIndex = Math.min(exp.indexOf("+"),exp.indexOf("-"));
 	    if (opIndex == -1)
@@ -249,21 +343,24 @@ public class MathString {
 
     public static void main (String[] args){
 	
-	/*	System.out.println(simpleAdd("6.18 + 7.27"));
+	/*	System.out.println(simpleAdd("6.18+~7.27"));
 	System.out.println(simpleSubtract("6.18-7.28"));
 	System.out.println(simpleMultiply("6.18*7.28"));
 	System.out.println(simpleDivide("6.18/7.28"));
 	System.out.println(simplePower("6^2"));
-	System.out.println(addLtoR("3+3+4"));
+      	System.out.println(addLtoR("3+3+4"));
 	System.out.println(multiplyLtoR("2*3*3*5/3"));
 	System.out.println(powerLtoR("2^2+4^2"));
 	System.out.println(pemdas("3^2+3*2-6/2"));
 	System.out.println(pemdas("3^2 + 3*2      - 6 / 2"));
+	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
 	*/
-        
+
+	
 	for(String s : args){
 	    System.out.println(MathString.pemdas(s));
 	}
+	
     }
 
 
