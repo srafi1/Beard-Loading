@@ -341,6 +341,12 @@ public class MathString {
 	return exp;
     }
 
+    public static String parens(String exp){
+	String bkparen = exp.indexOf(")");
+
+
+    }
+
     public static void main (String[] args){
 	
 	/*	System.out.println(simpleAdd("6.18+~7.27"));
