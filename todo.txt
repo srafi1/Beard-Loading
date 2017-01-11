@@ -1,0 +1,24 @@
+Beard Loading
+Shakil Rafi, Ishtiaque Mahdi, Mansour Elsharawy
+APCS1 pd3
+
+				            Line Forge - Todo
+[WHILE THE OTHER STEPS ARE BEING DONE: Create the input interface as to be followed in flowchart.]
+
+1. Write class MathString. This class is central to the program; just about everything depends on it in some way. 
+	I. Implement converting a String that contains a mathematical expression to the result of said mathematical expression, using order of operations, parentheses, pipes, and negative numbers appropriately.
+	II. An equality checker that takes the String form of an EQUATION (Ex: "3=2+1") and returns a boolean affirming its validity.
+	III. TEST TEST TEST. If this part fails in any situation, we're doomed. 
+
+2. Create class AxisGraph. Contains instance variable of a 2D array of class Point (easily written class). 
+	I. Basic constructor that will set each Point to have the proper x and y values according to its location in the 2D array.
+	II. Methods such as zoom(), move(), (maybe even rotate or stretch) to manipulate what part of the plane the user can view.
+	III.  Method graphRelation(), which will ask all Points in the array to substitute their x and y for the x's and y's in the relation and change how they will appear on the graph (point is turned on if equation holds at that x and y).
+	IV. Method graphFunction(), which is different in that "f(x)" will be interpreted as "y" by the Points and will save the function for use in other functions. (Allowing things like h(x) = f(x) + 1). MathString also needs to be augmented to handle functions.
+---------------------------------- VERY OPTIONAL ---------------------------
+3. Add non-custom functions to MathString (sin, cos, tan, sqrt, etc)
+
+4. Equation solver. Not sure about doing this solely with MathString or by doing it using an instance of AxisGraph and its array of Points.
+
+5. Graphing multiple functions with colors to match functions to their graphs.
+
