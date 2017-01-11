@@ -278,7 +278,7 @@ public class MathString {
 	if(exp.indexOf("^") != -1){
 	    int opIndex = exp.indexOf("^");
 
-	     int start = 0;
+	    int start = 0;
 	    int end = 0;
 
 	    //Finds end index of simple string
@@ -338,11 +338,8 @@ public class MathString {
 	    int nextParen = exp.substring(openParen+1).indexOf("(");
 	    int closeParen = exp.indexOf(")");
 	    while (nextParen < closeParen && nextParen != -1) {
-		System.out.println(openParen);
-		System.out.println(closeParen);
-		System.out.println(closeParen);		
 		openParen = nextParen;
-		nextParen = exp.substring(openParen+1).indexOf("(");
+		nextParen = exp.indexOf("(", openParen+1);
 	    }
 	    String parens = exp.substring(openParen, closeParen+1);
 	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
@@ -359,7 +356,6 @@ public class MathString {
 	return exp;
     }
 
-
     public static String pemdas(String exp){
 	exp = removeWhitespace(exp);
 	//System.out.println(exp);
@@ -375,17 +371,17 @@ public class MathString {
     public static void main (String[] args){
 	
 	/*	System.out.println(simpleAdd("6.18+~7.27"));
-	System.out.println(simpleSubtract("6.18-7.28"));
-	System.out.println(simpleMultiply("6.18*~7.28"));
-	System.out.println(simpleDivide("6.18/~7.28"));
-	System.out.println(simplePower("6^2"));
-      	System.out.println(addLtoR("3+3+4"));
-	System.out.println(multiplyLtoR("2*3*3*5/3"));
-	System.out.println(powerLtoR("2^2+4^2"));
-	System.out.println(pemdas("3^2+3*2-6/2"));
+		System.out.println(simpleSubtract("6.18-7.28"));
+		System.out.println(simpleMultiply("6.18*~7.28"));
+		System.out.println(simpleDivide("6.18/~7.28"));
+		System.out.println(simplePower("6^2"));
+		System.out.println(addLtoR("3+3+4"));
+		System.out.println(multiplyLtoR("2*3*3*5/3"));
+		System.out.println(powerLtoR("2^2+4^2"));
+		System.out.println(pemdas("3^2+3*2-6/2"));
 	
-        System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
-       	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
+		System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
+		System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
 	*/
 
 	
@@ -393,8 +389,6 @@ public class MathString {
 	    System.out.println(MathString.pemdas(s));
 	}
 	
-	
     }
-
 
 }
