@@ -1,0 +1,81 @@
+Team Beard Loading
+Ishtiaque Mahdi
+Shakil Rafi
+Mansour Elsharawy
+pd 3
+---------------------
+Line Forge
+
+Suggested usage: 
+* Replace all fields, angle brackets included, with specified info.
+  eg, pd <pd#> --> pd 3
+* Delete these instructions once all teammates understand usage.
+
+devlog--
+Use keyboard shortcut to jump to end,
+ replicate entry template,
+ modify appropriately.
+
+zone of reflection--
+Flesh out each category whenever necessary, appropriate.
+ Need not be fully filled in until end of project,
+ but best done as you go along.
+
+
+/////////// Zone of Reflection \\\\\\\\\\\
+------------------------------------------
+OBSTACLES OVERCOME
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When we were evalutaing negative numbers, we kept on getting an index out of range when multiplying and dividing. However, it turned out that we forgot the ~ symbol in those two methods. So we made a global number variable instead so an error like this won't happen again. 
+
+
+UNRESOLVED ISSUES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+None currently.
+
+COOL STUFF LEARNED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Yet to  happen.
+
+MID-DEVELOPMENT DESIGN CHANGES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+No changes in design.
+ 
+LESSONS LEARNED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Still on the journey.
+
+
+
+ ______   ______   __   __   __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+
+
+2017-1-9
+--------------------------------------------------------------
+Shakil Rafi :: I worked on the project proposal.pdf.
+Ishtiaque Mahdi :: I worked on the UML diagram.
+Mansour Elsharawy :: I worked on the UML diagram.
+==============================================================
+
+
+2017-1-10
+--------------------------------------------------------------
+Shakil Rafi :: I worked on the todo.txt.
+Ishtiaque Mahdi :: I worked on the todo.txt.
+Mansour Elsharawy :: I worked on the flowchart and started MathString in order to prove the concept to Mr.Brown
+==============================================================
+
+
+2017-1-11
+--------------------------------------------------------------
+Shakil Rafi :: <Thing member did.>
+Ishtiaque Mahdi :: <Thing member did.>
+Mansour Elsharawy :: <Thing member did.>
+==============================================================
