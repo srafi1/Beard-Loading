@@ -1,0 +1,270 @@
+public class MathString {
+
+
+
+    public static String removeWhitespace(String exp){
+	if(exp.indexOf(" ") != -1){
+	    int spaceIndex = exp.indexOf(" ");
+	    return removeWhitespace(exp.substring(0,spaceIndex) + exp.substring(spaceIndex + 1));
+	}
+	else{
+	    return exp;
+	}
+    }
+
+    public static String simpleAdd(String exp){
+	int index = exp.indexOf("+");
+	double val1 = Double.parseDouble(exp.substring(index + 1));
+	double val2 = Double.parseDouble(exp.substring(0,index));
+	return "" + (val1 + val2);
+	
+    }
+    
+    public static String simpleSubtract(String exp){
+	int index = exp.indexOf("-");
+	double val1 = Double.parseDouble(exp.substring(index + 1));
+	double val2 = Double.parseDouble(exp.substring(0,index));
+	return "" + (val2 - val1);
+	
+    }
+
+    public static String simpleMultiply(String exp){
+	int index = exp.indexOf("*");
+	double val1 = Double.parseDouble(exp.substring(index + 1));
+	double val2 = Double.parseDouble(exp.substring(0,index));
+	return "" + (val1 * val2);
+	
+    }
+    
+    public static String simpleDivide(String exp){
+	int index = exp.indexOf("/");
+	double val1 = Double.parseDouble(exp.substring(index + 1));
+	double val2 = Double.parseDouble(exp.substring(0,index));
+	return "" + (val2/ val1);
+	
+    }
+
+    public static String simplePower(String exp){
+	int index = exp.indexOf("^");
+	double val1 = Double.parseDouble(exp.substring(index + 1));
+	double val2 = Double.parseDouble(exp.substring(0,index));
+	return "" + Math.pow(val2, val1);
+	
+    }
+
+    public static String addLtoR(String exp){
+	String numbers = "1234567890.";
+	if(exp.indexOf("+") != -1 || exp.indexOf("-") != -1){
+	    int opIndex = Math.min(exp.indexOf("+"),exp.indexOf("-"));
+	    if (opIndex == -1)
+		opIndex = Math.max(exp.indexOf("+"),exp.indexOf("-"));
+	    //System.out.println(opIndex);
+	    int start = 0;
+	    int end = 0;
+
+	    //Finds end index of simple string
+	    int dotsEnd = 0;
+	    for(int x = opIndex + 1; x < exp.length();x++){
+		if(numbers.indexOf(exp.substring(x,x+1)) != -1){
+		    end = x + 1;
+		    //System.out.println(end);
+		    if(exp.substring(x,x+1).equals("."))
+			dotsEnd ++;
+		    if (dotsEnd > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    end = x;
+		    break;
+		}
+	    }
+
+	    //Finds start index of simple string
+	    int dotsStart = 0;
+	    for(int x = opIndex - 1; x > 0; x--){
+		if(numbers.indexOf(exp.substring(x-1,x)) != -1){
+		    start = x-1;
+		    if(exp.substring(x,x+1).equals("."))
+			dotsStart ++;
+		    if (dotsStart > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    start = x;
+		    break;
+		}
+	    }
+
+	    String simpleExp = exp.substring(start,end);
+	    // System.out.println("EASY EVAL: " + simpleExp);
+	    String before = exp.substring(0, start);
+	    //System.out.println("BEFORE: " + before);
+	    String after = exp.substring(end);
+	    //System.out.println("AFTER: " + after);
+	    if (simpleExp.indexOf("+") != -1){
+		return addLtoR(before + simpleAdd(simpleExp) + after);
+	    }
+	    else{
+		return addLtoR(before + simpleSubtract(simpleExp) + after);
+	    }
+	}
+	else{
+	    return exp;
+	}	
+    }//end addLtoR
+
+
+
+    public static String multiplyLtoR(String exp){
+	String numbers = "1234567890.";
+	if(exp.indexOf("*") != -1 || exp.indexOf("/") != -1){
+	    int opIndex = Math.min(exp.indexOf("*"),exp.indexOf("/"));
+	    if (opIndex == -1)
+		opIndex = Math.max(exp.indexOf("*"),exp.indexOf("/"));
+	    //System.out.println(opIndex);
+	    int start = 0;
+	    int end = 0;
+
+	    //Finds end index of simple string
+	    int dotsEnd = 0;
+	    for(int x = opIndex + 1; x < exp.length();x++){
+		if(numbers.indexOf(exp.substring(x,x+1)) != -1){
+		    end = x + 1;
+		    //System.out.println(end);
+		    if(exp.substring(x,x+1).equals("."))
+			dotsEnd ++;
+		    if (dotsEnd > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    end = x;
+		    break;
+		}
+	    }
+
+	    //Finds start index of simple string
+	    int dotsStart = 0;
+	    for(int x = opIndex - 1; x > 0; x--){
+		if(numbers.indexOf(exp.substring(x-1,x)) != -1){
+		    start = x-1;
+		    if(exp.substring(x,x+1).equals("."))
+			dotsStart ++;
+		    if (dotsStart > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    start = x;
+		    break;
+		}
+	    }
+
+	    String simpleExp = exp.substring(start,end);
+	    //System.out.println("EASY EVAL: " + simpleExp);
+	    String before = exp.substring(0, start);
+	    //System.out.println("BEFORE: " + before);
+	    String after = exp.substring(end);
+	    //System.out.println("AFTER: " + after);
+	    if (simpleExp.indexOf("*") != -1){
+		return multiplyLtoR(before + simpleMultiply(simpleExp) + after);
+	    }
+	    else{
+		return multiplyLtoR(before + simpleDivide(simpleExp) + after);
+	    }
+	}
+	else{
+	    return exp;
+	}
+    }//end multiplyLtoR
+
+    public static String powerLtoR(String exp){
+	String numbers = "1234567890.";
+	if(exp.indexOf("^") != -1){
+	    int opIndex = exp.indexOf("^");
+
+	     int start = 0;
+	    int end = 0;
+
+	    //Finds end index of simple string
+	    int dotsEnd = 0;
+	    for(int x = opIndex + 1; x < exp.length();x++){
+		if(numbers.indexOf(exp.substring(x,x+1)) != -1){
+		    end = x + 1;
+		    // System.out.println(end);
+		    if(exp.substring(x,x+1).equals("."))
+			dotsEnd ++;
+		    if (dotsEnd > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    end = x;
+		    break;
+		}
+	    }
+
+	    //Finds start index of simple string
+	    int dotsStart = 0;
+	    for(int x = opIndex - 1; x > 0; x--){
+		if(numbers.indexOf(exp.substring(x-1,x)) != -1){
+		    start = x-1;
+		    if(exp.substring(x,x+1).equals("."))
+			dotsStart ++;
+		    if (dotsStart > 1)
+			return "NO MORE DOTS";
+		    
+		}
+		else{
+		    start = x;
+		    break;
+		}
+	    }
+
+	    String simpleExp = exp.substring(start,end);
+	    //System.out.println("EASY EVAL: " + simpleExp);
+	    String before = exp.substring(0, start);
+	    //System.out.println("BEFORE: " + before);
+	    String after = exp.substring(end);
+	    //System.out.println("AFTER: " + after);
+	    
+	    return powerLtoR(before + simplePower(simpleExp) + after);
+	    
+	}
+	else{
+	    return exp;
+	}
+    }//end powerLtoR
+
+    public static String pemdas(String exp){
+	exp = removeWhitespace(exp);
+	//System.out.println(exp);
+	exp = powerLtoR(exp);
+	exp = multiplyLtoR(exp);
+	exp = addLtoR(exp);
+	return exp;
+    }
+
+    public static void main (String[] args){
+	
+	/*	System.out.println(simpleAdd("6.18 + 7.27"));
+	System.out.println(simpleSubtract("6.18-7.28"));
+	System.out.println(simpleMultiply("6.18*7.28"));
+	System.out.println(simpleDivide("6.18/7.28"));
+	System.out.println(simplePower("6^2"));
+	System.out.println(addLtoR("3+3+4"));
+	System.out.println(multiplyLtoR("2*3*3*5/3"));
+	System.out.println(powerLtoR("2^2+4^2"));
+	System.out.println(pemdas("3^2+3*2-6/2"));
+	System.out.println(pemdas("3^2 + 3*2      - 6 / 2"));
+	*/
+        
+	for(String s : args){
+	    System.out.println(MathString.pemdas(s));
+	}
+    }
+
+
+}
