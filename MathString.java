@@ -333,10 +333,41 @@ public class MathString {
 	    return exp;
 	}
     }//end powerLtoR
+    
+    public static String evaluateParens(String exp) {
+	while (exp.indexOf("(") != -1) {
+	    //System.out.println(exp);
+	    int openParen = exp.indexOf("(");
+	    int nextParen = exp.substring(openParen+1).indexOf("(");
+	    int closeParen = exp.indexOf(")");
+	    while (nextParen < closeParen && nextParen != -1) {
+		System.out.println(openParen);
+		System.out.println(closeParen);
+		System.out.println(closeParen);		
+		openParen = nextParen;
+		nextParen = exp.substring(openParen+1).indexOf("(");
+	    }
+	    String numbers = "1234567890.";
+	    String parens = exp.substring(openParen, closeParen+1);
+	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
+		exp = exp.replace(parens, "*"+parens);
+		openParen++;
+		closeParen++;
+	    }
+	    if (closeParen != exp.length()-1 && numbers.indexOf(exp.substring(closeParen+1, closeParen+2)) != -1) {
+		exp = exp.replace(parens, parens+"*");
+	    }
+	    String inParens = parens.substring(1, parens.length()-1);
+	    exp = exp.replace(parens, pemdas(inParens));
+	}
+	return exp;
+    }
+
 
     public static String pemdas(String exp){
 	exp = removeWhitespace(exp);
 	//System.out.println(exp);
+	exp = evaluateParens(exp);
 	exp = powerLtoR(exp);
 	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
