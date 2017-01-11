@@ -1,18 +1,6 @@
-import java.util.Scanner;
-
 public class MathString {
 
     private static final String numbers = "1234567890.~";
-
-    public static String removeWhitespace(String exp){
-	if(exp.indexOf(" ") != -1){
-	    int spaceIndex = exp.indexOf(" ");
-	    return removeWhitespace(exp.substring(0,spaceIndex) + exp.substring(spaceIndex + 1));
-	}
-	else{
-	    return exp;
-	}
-    }
 
     public static String negativeNotate(String negNum){
 	if(negNum.substring(0,1).equals( "-"))
@@ -27,7 +15,7 @@ public class MathString {
 	int index = exp.indexOf("+");
 	String arg1 = (exp.substring(index + 1));
 	String arg2 = (exp.substring(0,index));
-	//	System.out.println(arg1);
+	//System.out.println(arg1);
 	//System.out.println(arg2);
 	if (arg1.substring(0,1).equals("~")){
 	    val1 = -1 * Double.parseDouble(arg1.substring(1));
@@ -357,7 +345,7 @@ public class MathString {
     }
 
     public static String pemdas(String exp){
-	exp = removeWhitespace(exp);
+	exp = exp.replace(" ", "");
 	//System.out.println(exp);
 	exp = evaluateParens(exp);
 	exp = powerLtoR(exp);
