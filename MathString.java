@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class MathString {
 
 
@@ -212,7 +214,7 @@ public class MathString {
 
 
     public static String multiplyLtoR(String exp){
-	String numbers = "1234567890.";
+	String numbers = "1234567890.~";
 	if(exp.indexOf("*") != -1 || exp.indexOf("/") != -1){
 	    int opIndex = Math.min(exp.indexOf("*"),exp.indexOf("/"));
 	    if (opIndex == -1)
@@ -275,7 +277,7 @@ public class MathString {
     }//end multiplyLtoR
 
     public static String powerLtoR(String exp){
-	String numbers = "1234567890.";
+	String numbers = "1234567890.~";
 	if(exp.indexOf("^") != -1){
 	    int opIndex = exp.indexOf("^");
 
@@ -331,12 +333,45 @@ public class MathString {
 	    return exp;
 	}
     }//end powerLtoR
+    
+    public static String evaluateParens(String exp) {
+	while (exp.indexOf("(") != -1) {
+	    //System.out.println(exp);
+	    int openParen = exp.indexOf("(");
+	    int nextParen = exp.substring(openParen+1).indexOf("(");
+	    int closeParen = exp.indexOf(")");
+	    while (nextParen < closeParen && nextParen != -1) {
+		System.out.println(openParen);
+		System.out.println(closeParen);
+		System.out.println(closeParen);		
+		openParen = nextParen;
+		nextParen = exp.substring(openParen+1).indexOf("(");
+	    }
+	    String numbers = "1234567890.";
+	    String parens = exp.substring(openParen, closeParen+1);
+	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
+		exp = exp.replace(parens, "*"+parens);
+		openParen++;
+		closeParen++;
+	    }
+	    if (closeParen != exp.length()-1 && numbers.indexOf(exp.substring(closeParen+1, closeParen+2)) != -1) {
+		exp = exp.replace(parens, parens+"*");
+	    }
+	    String inParens = parens.substring(1, parens.length()-1);
+	    exp = exp.replace(parens, pemdas(inParens));
+	}
+	return exp;
+    }
+
 
     public static String pemdas(String exp){
 	exp = removeWhitespace(exp);
 	//System.out.println(exp);
+	exp = evaluateParens(exp);
 	exp = powerLtoR(exp);
+	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
+	//System.out.println(exp);
 	exp = addLtoR(exp);
 	return exp;
     }
@@ -351,21 +386,23 @@ public class MathString {
 	
 	/*	System.out.println(simpleAdd("6.18+~7.27"));
 	System.out.println(simpleSubtract("6.18-7.28"));
-	System.out.println(simpleMultiply("6.18*7.28"));
-	System.out.println(simpleDivide("6.18/7.28"));
+	System.out.println(simpleMultiply("6.18*~7.28"));
+	System.out.println(simpleDivide("6.18/~7.28"));
 	System.out.println(simplePower("6^2"));
       	System.out.println(addLtoR("3+3+4"));
 	System.out.println(multiplyLtoR("2*3*3*5/3"));
 	System.out.println(powerLtoR("2^2+4^2"));
 	System.out.println(pemdas("3^2+3*2-6/2"));
-	System.out.println(pemdas("3^2 + 3*2      - 6 / 2"));
-	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
+	
+        System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
+       	System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
 	*/
 
 	
 	for(String s : args){
 	    System.out.println(MathString.pemdas(s));
 	}
+	
 	
     }
 
