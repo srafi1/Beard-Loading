@@ -3,16 +3,13 @@ public class Point{
     public String myString;
 
     public Point(){
-	x=0;
-	y=0;
-	myString="O";
-	checkAxis();
+	this(0, 0);
+	myString = " ";
     }
 
     public Point (double xIn, double yIn){
-	this();
-	x=xIn;
-	y=yIn;
+	x = xIn;
+	y = yIn;
 	checkAxis();
     }
 
@@ -28,7 +25,7 @@ public class Point{
 	else if(y==0)
 	    myString="-";
 	else
-	    myString="O";
+	    myString=" ";
     }
 
     public void subEq(String eq){
@@ -37,14 +34,31 @@ public class Point{
 	if (MathString.isEqual(eq))
 	    myString = "*";
 	else{
-	    myString="O";
+	    myString=" ";
 	    checkAxis();
 	}
     }
 
     public void setCor(double X, double Y){
-	x=X;
-	y=Y;
+	x = X;
+	y = Y;
+	checkAxis();
+    }
+
+    public double[] getCor() {
+	double[] coords = {x, y};
+	return coords;
+    }
+
+    public void scale(double scale) {
+	x *= scale;
+	y *= scale;
+	checkAxis();
+    }
+
+    public void translate(double dx, double dy) {
+	x += dx;
+	y += dy;
 	checkAxis();
     }
 
