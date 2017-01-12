@@ -6,7 +6,8 @@ public class AxisGraph  {
 	
 	for (int y = 0; y < plane.length; y++)
 	    for (int x = 0; x < plane[0].length; x++)
-		plane[y][x] = new Point(x-10, y-10);
+		plane[y][x] = new Point();
+	zoom(10);
     }
 
     public String toString() {
@@ -21,6 +22,24 @@ public class AxisGraph  {
 	return retStr;
     }
 
+    public void zoom(double highVal){
+	double increment = highVal / ((plane.length - 1) / 2.0);
+	for (int y = 0; y < plane.length; y++){
+	    double yVal = highVal - (y*increment); 
+	    for(int x = 0; x < plane.length; x++){
+		double xVal = (-1 * highVal) + (x*increment);
+		plane[y][x].setCor(xVal,yVal);
+	    }
+	}
+	    
+    }
+
+    public void graph(String eq){
+	for(Point[] row: plane)
+	    for(Point p: row)
+		p.subEq(eq);
+    }
+    /*
     public void setGraph(double cx, double cy, double scale) {
 	for (int y = 0; y < plane.length; y++)
 	    for (int x = 0; x < plane[0].length; x++) {
@@ -37,13 +56,14 @@ public class AxisGraph  {
     public void centerAt(double cx, double cy) {
 	setGraph(cx, cy, 1);
     }
-    
+    */
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
 	System.out.println(a);
-
-	a.centerAt(5, 1);
+	a.graph("y=x^2");
+	a.zoom(5);
 	System.out.println(a);
+
     }
     
 }

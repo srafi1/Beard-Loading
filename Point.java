@@ -49,13 +49,13 @@ public class Point{
 	double[] coords = {x, y};
 	return coords;
     }
-
+    /*
     public void scale(double scale) {
 	x *= scale;
 	y *= scale;
 	checkAxis();
     }
-
+    */
     public void translate(double dx, double dy) {
 	x += dx;
 	y += dy;
