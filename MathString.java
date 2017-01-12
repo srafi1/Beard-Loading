@@ -302,11 +302,13 @@ public class MathString {
 	exp = exp.replace(" ", "");
 	//System.out.println(exp);
 	exp = evaluateParens(exp);
+	exp = evaluateAbs(exp);
 	exp = powerLtoR(exp);
 	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
 	//System.out.println(exp);
 	exp = addLtoR(exp);
+
 	return exp;
     }
 
@@ -326,7 +328,40 @@ public class MathString {
 	return exp;	
     }
 
+    /*   public static String abs(String exp){
+	while (exp.indexOf("abs[") != -1){
+	    String exps = exp.substring(1,(exp.length()-1));
+	    return exps;
+	}
+	}*/
 
+        public static String evaluateAbs(String exp) {
+	while (exp.indexOf("abs[") != -1) {
+	    //System.out.println(exp);
+	    int openAbs = exp.indexOf("abs[");
+	    int nextAbs = exp.substring(openAbs+4).indexOf("abs[");
+	    int closeAbs = exp.indexOf("]");
+	    while (nextAbs < closeAbs && nextAbs != -1) {
+		openAbs = nextAbs;
+		nextAbs = exp.indexOf("abs[", openAbs+4);
+	    }
+	    String abs = exp.substring(openAbs, closeAbs+1);
+	    if (openAbs != 0 && numbers.indexOf(exp.substring(openAbs-1, openAbs)) != -1) {
+		exp = exp.replace(abs, "*"+abs);
+		openAbs++;
+		closeAbs++;
+	    }
+	    if (closeAbs != exp.length()-1 && numbers.indexOf(exp.substring(closeAbs+1, closeAbs+2)) != -1) {
+		exp = exp.replace(abs, abs+"*");
+	    }
+	    String inAbs = abs.substring(4, abs.length()-1);
+	    if (inAbs.indexOf("~") > -1){
+		    inAbs = abs.substring(5, abs.length()-1);
+		}
+	    exp = exp.replace(abs, pemdas(inAbs));
+	}
+	return exp;
+    }
 
 
     public static void main (String[] args){
