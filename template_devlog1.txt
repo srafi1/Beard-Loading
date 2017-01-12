@@ -69,13 +69,13 @@ Mansour Elsharawy :: I worked on the UML diagram.
 --------------------------------------------------------------
 Shakil Rafi :: I worked on the todo.txt.
 Ishtiaque Mahdi :: I worked on the todo.txt.
-Mansour Elsharawy :: I worked on the flowchart and started MathString in order to prove the concept to Mr.Brown
+Mansour Elsharawy :: I worked on the flowchart and started MathString in order to prove the concept to Mr.Brown. I did addition, subtraction, multiplication, division, exponents, and negative numbers.
 ==============================================================
 
 
 2017-1-11
 --------------------------------------------------------------
-Shakil Rafi :: <Thing member did.>
-Ishtiaque Mahdi :: <Thing member did.>
-Mansour Elsharawy :: <Thing member did.>
+Shakil Rafi :: I worked on parenthesis evaluation with Ish and cleaned up MathString.
+Ishtiaque Mahdi :: I worked on parenthesis evalutaion with Shakil and did technical stuff like add cs1 folder, overwrite .gitignore, and devlog.
+Mansour Elsharawy :: I worked on the devlog. 
 ==============================================================
