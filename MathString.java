@@ -58,8 +58,6 @@ public class MathString {
 	val1 = notateToDouble(arg1);
 	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val1 * val2));
-	
-	
     }
     
     public static String simpleDivide(String exp){
@@ -72,8 +70,7 @@ public class MathString {
 	//System.out.println(arg2);
 	val1 = notateToDouble(arg1);
 	val2 = notateToDouble(arg2);
-	return negativeNotate("" + (val2 / val1));
-	
+	return negativeNotate("" + (val2 / val1));	
     }
 
     public static String simplePower(String exp){
@@ -87,7 +84,6 @@ public class MathString {
 	val1 = notateToDouble(arg1);
 	val2 = notateToDouble(arg2);
 	return negativeNotate("" + Math.pow(val2,val1));
-	
     }
 
     public static String addLtoR(String exp){
@@ -108,8 +104,7 @@ public class MathString {
 		    if(exp.substring(x,x+1).equals("."))
 			dotsEnd ++;
 		    if (dotsEnd > 1)
-			return "NO MORE DOTS";
-		    
+			return "NO MORE DOTS";		    
 		}
 		else{
 		    end = x;
@@ -275,25 +270,27 @@ public class MathString {
     
     public static String evaluateParens(String exp) {
 	while (exp.indexOf("(") != -1) {
-	    //System.out.println(exp);
+	    //System.out.println("start: " + exp);
 	    int openParen = exp.indexOf("(");
-	    int nextParen = exp.substring(openParen+1).indexOf("(");
+	    int nextParen = exp.indexOf("(", openParen+1);
 	    int closeParen = exp.indexOf(")");
 	    while (nextParen < closeParen && nextParen != -1) {
 		openParen = nextParen;
 		nextParen = exp.indexOf("(", openParen+1);
 	    }
 	    String parens = exp.substring(openParen, closeParen+1);
+	    //System.out.println(parens);
 	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
-		exp = exp.replace(parens, "*"+parens);
+		exp = exp.substring(0, openParen) + "*" + exp.substring(openParen);
 		openParen++;
 		closeParen++;
 	    }
 	    if (closeParen != exp.length()-1 && numbers.indexOf(exp.substring(closeParen+1, closeParen+2)) != -1) {
-		exp = exp.replace(parens, parens+"*");
+		exp = exp.substring(0, closeParen+1) + "*" + exp.substring(closeParen+1);
 	    }
 	    String inParens = parens.substring(1, parens.length()-1);
-	    exp = exp.replace(parens, pemdas(inParens));
+	    exp = exp.substring(0, openParen) + pemdas(inParens) + exp.substring(closeParen + 1);
+	    //System.out.println("end: " + exp);
 	}
 	return exp;
     }
