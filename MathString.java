@@ -9,6 +9,15 @@ public class MathString {
 	    return negNum;
     }
 
+    public static double notateToDouble(String negNum){
+	if (negNum.substring(0,1).equals("~")){
+	    return -1 * Double.parseDouble(negNum.substring(1));
+	}
+	else{
+	    return Double.parseDouble(negNum);
+	}
+    }
+
     public static String simpleAdd(String exp){
 	double val1;
 	double val2;
@@ -17,19 +26,8 @@ public class MathString {
 	String arg2 = (exp.substring(0,index));
 	//System.out.println(arg1);
 	//System.out.println(arg2);
-	if (arg1.substring(0,1).equals("~")){
-	    val1 = -1 * Double.parseDouble(arg1.substring(1));
-	}
-	else{
-	    val1 = Double.parseDouble(arg1);
-	}
-	
-	if (arg2.substring(0,1).equals("~")){
-	    val2 = -1 * Double.parseDouble(arg2.substring(1));
-	}
-	else{
-	    val2 = Double.parseDouble(arg2);
-	}
+	val1 = notateToDouble(arg1);
+	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val1 + val2));
 	
     }
@@ -42,19 +40,8 @@ public class MathString {
 	String arg2 = (exp.substring(0,index));
 	//System.out.println(arg1);
 	//System.out.println(arg2);
-	if (arg1.substring(0,1).equals("~")){
-	    val1 = -1 * Double.parseDouble(arg1.substring(1));
-	}
-	else{
-	    val1 = Double.parseDouble(arg1);
-	}
-	
-	if (arg2.substring(0,1).equals("~")){
-	    val2 = -1 * Double.parseDouble(arg2.substring(1));
-	}
-	else{
-	    val2 = Double.parseDouble(arg2);
-	}
+	val1 = notateToDouble(arg1);
+	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val2 - val1));
 	
 	
@@ -68,19 +55,8 @@ public class MathString {
 	String arg2 = (exp.substring(0,index));
 	//System.out.println(arg1);
 	//System.out.println(arg2);
-	if (arg1.substring(0,1).equals("~")){
-	    val1 = -1 * Double.parseDouble(arg1.substring(1));
-	}
-	else{
-	    val1 = Double.parseDouble(arg1);
-	}
-	
-	if (arg2.substring(0,1).equals("~")){
-	    val2 = -1 * Double.parseDouble(arg2.substring(1));
-	}
-	else{
-	    val2 = Double.parseDouble(arg2);
-	}
+	val1 = notateToDouble(arg1);
+	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val1 * val2));
 	
 	
@@ -94,19 +70,8 @@ public class MathString {
 	String arg2 = (exp.substring(0,index));
 	//System.out.println(arg1);
 	//System.out.println(arg2);
-	if (arg1.substring(0,1).equals("~")){
-	    val1 = -1 * Double.parseDouble(arg1.substring(1));
-	}
-	else{
-	    val1 = Double.parseDouble(arg1);
-	}
-	
-	if (arg2.substring(0,1).equals("~")){
-	    val2 = -1 * Double.parseDouble(arg2.substring(1));
-	}
-	else{
-	    val2 = Double.parseDouble(arg2);
-	}
+	val1 = notateToDouble(arg1);
+	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val2 / val1));
 	
     }
@@ -119,19 +84,8 @@ public class MathString {
 	String arg2 = (exp.substring(0,index));
 	//System.out.println(arg1);
 	//System.out.println(arg2);
-	if (arg1.substring(0,1).equals("~")){
-	    val1 = -1 * Double.parseDouble(arg1.substring(1));
-	}
-	else{
-	    val1 = Double.parseDouble(arg1);
-	}
-	
-	if (arg2.substring(0,1).equals("~")){
-	    val2 = -1 * Double.parseDouble(arg2.substring(1));
-	}
-	else{
-	    val2 = Double.parseDouble(arg2);
-	}
+	val1 = notateToDouble(arg1);
+	val2 = notateToDouble(arg2);
 	return negativeNotate("" + Math.pow(val2,val1));
 	
     }
@@ -356,26 +310,51 @@ public class MathString {
 	return exp;
     }
 
-    public static void main (String[] args){
-	
-	/*	System.out.println(simpleAdd("6.18+~7.27"));
-		System.out.println(simpleSubtract("6.18-7.28"));
-		System.out.println(simpleMultiply("6.18*~7.28"));
-		System.out.println(simpleDivide("6.18/~7.28"));
-		System.out.println(simplePower("6^2"));
-		System.out.println(addLtoR("3+3+4"));
-		System.out.println(multiplyLtoR("2*3*3*5/3"));
-		System.out.println(powerLtoR("2^2+4^2"));
-		System.out.println(pemdas("3^2+3*2-6/2"));
-	
-		System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
-		System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
-	*/
+    public static boolean isEqual(String eq){
+	int test = 1;
+	int equalsIndex = eq.indexOf("=");
+	String lhs = eq.substring(0,equalsIndex);
+	String rhs = eq.substring(equalsIndex + 1);
+	double side1 = notateToDouble(pemdas(lhs));
+	double side2 = notateToDouble(pemdas(rhs));
 
+	return (side1 == side2);
+    }
+
+    public static String sub(String exp,String var, double val){
+	exp = exp.replace(var, "(" + negativeNotate("" + val) + ")");
+	return exp;	
+    }
+
+
+
+
+    public static void main (String[] args){
+	/*
+	  System.out.println(simpleAdd("6.18+~7.27"));
+	  System.out.println(simpleSubtract("6.18-7.28"));
+	  System.out.println(simpleMultiply("6.18*~7.28"));
+	  System.out.println(simpleDivide("6.18/~7.28"));
+	  System.out.println(simplePower("6^2"));
+	  System.out.println(addLtoR("3+3+4"));
+	  System.out.println(multiplyLtoR("2*3*3*5/3"));
+	  System.out.println(powerLtoR("2^2+4^2"));
+	  System.out.println(pemdas("3^2+3*2-6/2"));
 	
-	for(String s : args){
-	    System.out.println(MathString.pemdas(s));
-	}
+	  System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
+	  System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
+       
+
+	  System.out.println(notateToDouble("~3.0"));
+	*/
+	//System.out.println(pemdas(sub("x^2 + 3x + 7","x",2)));
+	//System.out.println(pemdas("(2)^2 + 3(2) + 7"));
+	
+	
+	  for(String s : args){
+	  System.out.println(MathString.pemdas(s));
+	  }
+	
 	
     }
 
