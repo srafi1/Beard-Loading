@@ -75,7 +75,7 @@ Mansour Elsharawy :: I worked on the flowchart and started MathString in order t
 
 2017-1-11
 --------------------------------------------------------------
-Shakil Rafi :: I worked on parenthesis evaluation with Ish and cleaned up MathString.
+Shakil Rafi :: I worked on parenthesis evaluation with Ish and cleaned up MathString. I started the driver file to lay out the general input structure.
 Ishtiaque Mahdi :: I worked on parenthesis evalutaion with Shakil and did technical stuff like add cs1 folder, overwrite .gitignore, and devlog.
 Mansour Elsharawy :: I worked on the devlog. 
 ==============================================================
