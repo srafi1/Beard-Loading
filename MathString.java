@@ -355,7 +355,10 @@ public class MathString {
 	    if (inAbs.indexOf("~") > -1){
 		    inAbs = abs.substring(5, abs.length()-1);
 		}
-	    exp = exp.replace(abs, pemdas(inAbs));
+	    String evaluated = pemdas(inAbs);
+	    if(evaluated.substring(0,1).equals("~"))
+	       evaluated = evaluated.substring(1);
+	    exp = exp.replace(abs,evaluated);
 	}
 	return exp;
     }
