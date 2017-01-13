@@ -42,6 +42,7 @@ public class Point{
     public void closeEnough(String eq,double halfInc){
 	boolean positives = false;
 	boolean negatives = false;
+	try{
 	String eq1 = MathString.sub(eq,"x",x + halfInc);
 	//System.out.println(eq1);
 	eq1= MathString.sub(eq1,"y",y + halfInc);
@@ -76,7 +77,8 @@ public class Point{
 	    negatives = true;
 	else if(MathString.subSides(eq4) == 1)
 	    positives = true;
-
+	}
+	catch (Exception e) {}
 	if(positives && negatives)
 	    myString = "*";
 	else{

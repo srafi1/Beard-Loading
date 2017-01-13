@@ -72,7 +72,7 @@ public class AxisGraph  {
     */
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
-	a.graph("abs[x]+abs[y]=4");
+	a.graph("y=x^2");
 	System.out.println(a);
 
     }
