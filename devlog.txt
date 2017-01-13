@@ -6,22 +6,6 @@ pd 3
 ---------------------
 Line Forge
 
-Suggested usage: 
-* Replace all fields, angle brackets included, with specified info.
-  eg, pd <pd#> --> pd 3
-* Delete these instructions once all teammates understand usage.
-
-devlog--
-Use keyboard shortcut to jump to end,
- replicate entry template,
- modify appropriately.
-
-zone of reflection--
-Flesh out each category whenever necessary, appropriate.
- Need not be fully filled in until end of project,
- but best done as you go along.
-
-
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
 OBSTACLES OVERCOME
@@ -60,15 +44,13 @@ Still on the journey.
 2017-1-9
 --------------------------------------------------------------
 Shakil Rafi :: I worked on the project proposal.pdf.
-Ishtiaque Mahdi :: I worked on the UML diagram.
-Mansour Elsharawy :: I worked on the UML diagram.
+Mansour Elsharawy & Ishtiaque Mahdi :: We worked on the UML diagram.
 ==============================================================
 
 
 2017-1-10
 --------------------------------------------------------------
-Shakil Rafi :: I worked on the todo.txt.
-Ishtiaque Mahdi :: I worked on the todo.txt.
+Shakil Rafi & Ishtiaque Mahdi :: We worked on the todo.txt.
 Mansour Elsharawy :: I worked on the flowchart and started MathString in order to prove the concept to Mr.Brown. I did addition, subtraction, multiplication, division, exponents, and negative numbers.
 ==============================================================
 
@@ -85,6 +67,6 @@ Mansour Elsharawy :: I worked on the devlog and made the equality checker functi
 Shakil Rafi and Mansour Elsharawy :: worked on a new graphing algorithm to account for cases where the equation didn't land exactly on a point
 Shakil Rafi :: worked on expanding the driver file to include equation inputs for graphing and worked on the driver file to allow modifying the view of the graph with zoom and translate
 Mansour ELsharawy :: worked on functions in AxisGraph to properly handle zooming and graphing
-Ishtiaque Mahdi :: worked on UML diagram and helped out with algorithmic thinking in other sections
+Ishtiaque Mahdi :: worked on UML diagram, flowchart, and helped out with algorithmic thinking in other sections.
 ==============================================================
 
