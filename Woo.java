@@ -25,10 +25,15 @@ public class Woo  {
 	helpText += "translate [x] [y] -- moves the graph over\n";
 	helpText += "    eg: input: translate 1 -2\n";
 	helpText += "        output: moves graph 1 point left and 2 down\n";
+	helpText += "status -- prints out information about the current state of the graph\n";
+	helpText += "          ie: zoom level, translations, equation\n";
+	helpText += "NOTE: Use '~' instead of '-' for negatives\n";
 
 	boolean graphMode = false;
 	String eq = "";
 	double highVal = 10;
+	double totaldx = 0;
+	double totaldy = 0;
 	
 	while (true) {
 	    System.out.print("What to do...? (type 'help' for help)\n>");
@@ -49,24 +54,39 @@ public class Woo  {
 		}
 	    } else if (graphMode && input.indexOf("zoom") == 0) {
 		//zoom
-		double scale = Double.parseDouble(input.substring(5));
-		graph.zoom(scale);
-		graph.graph(eq);
-		highVal = scale;
-		System.out.println(graph);
+		try {
+		    double scale = Double.parseDouble(input.substring(5));
+		    graph.zoom(scale);
+		    graph.translate(totaldx, totaldy);
+		    graph.graph(eq);
+		    highVal = scale;
+		    System.out.println(graph);
+		} catch (Exception e) {
+		    System.out.println("A voice asks you to rethink your actions");
+		}
 	    } else if (graphMode && input.indexOf("translate") == 0) {
 		//translate
-		String params = input.substring(10);
-		String[] coords = params.split(" ");
-		double dx = Double.parseDouble(coords[0]);
-		double dy = Double.parseDouble(coords[1]);
+		try {
+		    String params = input.substring(10);
+		    String[] coords = params.split(" ");
+		    double dx = Double.parseDouble(coords[0]);
+		    double dy = Double.parseDouble(coords[1]);
 
-		//graph.translate(dx, dy);
-		graph.graph(eq);
-		System.out.println(graph);
+		    graph.translate(dx, dy);
+		    graph.graph(eq);
+
+		    totaldx += dx;
+		    totaldy += dy;
+
+		    System.out.println(graph);
+		} catch (Exception e) {
+		    System.out.println("A voice asks you to rethink your actions");
+		}
 	    } else if (input.equals("status")) {
+		System.out.println("Equation: " + eq);
 		System.out.println("Graph mode: " + graphMode);
-		System.out.println("Highest Value: " + highVal);
+		System.out.println("Zoom level: " + highVal);
+		System.out.println("Total translations: " + totaldx + " " + totaldy);
 	    } else {
 		try {
 		    System.out.println(MathString.pemdas(input));

@@ -40,6 +40,12 @@ public class AxisGraph  {
 	highest = highVal;
     }
 
+    public void translate(double dx, double dy) {
+	for (Point[] row : plane)
+	    for (Point p : row)
+		p.translate(dx, dy);
+    }
+    
     public void graph(String eq){
 	double increment =  highest / ((plane.length - 1) / 2.0);
 	for(Point[] row: plane)

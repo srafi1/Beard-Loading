@@ -28,8 +28,7 @@ public class MathString {
 	//System.out.println(arg2);
 	val1 = notateToDouble(arg1);
 	val2 = notateToDouble(arg2);
-	return negativeNotate("" + (val1 + val2));
-	
+	return negativeNotate("" + (val1 + val2));	
     }
     
     public static String simpleSubtract(String exp){
@@ -43,8 +42,6 @@ public class MathString {
 	val1 = notateToDouble(arg1);
 	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val2 - val1));
-	
-	
     }
 
     public static String simpleMultiply(String exp){
@@ -296,6 +293,37 @@ public class MathString {
 	return exp;
     }
 
+    public static String evaluateAbs(String exp) {
+	exp = exp.replace("~abs[","~1abs[");
+	while (exp.indexOf("abs[") != -1) {
+	    //System.out.println("start: " + exp);
+	    int openParen = exp.indexOf("abs[");
+	    int nextParen = exp.indexOf("abs[", openParen+1);
+	    int closeParen = exp.indexOf("]");
+	    while (nextParen < closeParen && nextParen != -1) {
+		openParen = nextParen;
+		nextParen = exp.indexOf("abs[", openParen+1);
+	    }
+	    String parens = exp.substring(openParen, closeParen+1);
+	    //System.out.println(parens);
+	    if (openParen != 0 && numbers.indexOf(exp.substring(openParen-1, openParen)) != -1) {
+		exp = exp.substring(0, openParen) + "*" + exp.substring(openParen);
+		openParen++;
+		closeParen++;
+	    }
+	    if (closeParen != exp.length()-1 && numbers.indexOf(exp.substring(closeParen+1, closeParen+2)) != -1) {
+		exp = exp.substring(0, closeParen+1) + "*" + exp.substring(closeParen+1);
+	    }
+	    String inParens = parens.substring(4, parens.length()-1);
+	    String result = pemdas(inParens);
+	    if (result.indexOf("~") == 0)
+		result = result.substring(1);
+	    exp = exp.substring(0, openParen) + result + exp.substring(closeParen + 1);
+	    //System.out.println("end: " + exp);
+	}
+	return exp;
+    }
+
     public static String pemdas(String exp){
 	exp = exp.replace(" ", "");
 	//System.out.println(exp);
@@ -343,43 +371,44 @@ public class MathString {
     }
 
     /*   public static String abs(String exp){
-	while (exp.indexOf("abs[") != -1){
-	    String exps = exp.substring(1,(exp.length()-1));
-	    return exps;
-	}
-	}*/
+	 while (exp.indexOf("abs[") != -1){
+	 String exps = exp.substring(1,(exp.length()-1));
+	 return exps;
+	 }
+	 }*/
 
-        public static String evaluateAbs(String exp) {
-	while (exp.indexOf("abs[") != -1) {
-	    //System.out.println(exp);
-	    int openAbs = exp.indexOf("abs[");
-	    int nextAbs = exp.substring(openAbs+4).indexOf("abs[");
-	    int closeAbs = exp.indexOf("]");
-	    while (nextAbs < closeAbs && nextAbs != -1) {
-		openAbs = nextAbs;
-		nextAbs = exp.indexOf("abs[", openAbs+4);
-	    }
-	    String abs = exp.substring(openAbs, closeAbs+1);
-	    if (openAbs != 0 && numbers.indexOf(exp.substring(openAbs-1, openAbs)) != -1) {
-		exp = exp.replace(abs, "*"+abs);
-		openAbs++;
-		closeAbs++;
-	    }
-	    if (closeAbs != exp.length()-1 && numbers.indexOf(exp.substring(closeAbs+1, closeAbs+2)) != -1) {
-		exp = exp.replace(abs, abs+"*");
-	    }
-	    String inAbs = abs.substring(4, abs.length()-1);
-	    if (inAbs.indexOf("~") > -1){
-		    inAbs = abs.substring(5, abs.length()-1);
-		}
-	    String evaluated = pemdas(inAbs);
-	    if(evaluated.substring(0,1).equals("~"))
-	       evaluated = evaluated.substring(1);
-	    exp = exp.replace(abs,evaluated);
-	}
-	return exp;
-    }
-
+    /*
+      public static String evaluateAbs(String exp) {
+      while (exp.indexOf("abs[") != -1) {
+      //System.out.println(exp);
+      int openAbs = exp.indexOf("abs[");
+      int nextAbs = exp.substring(openAbs+4).indexOf("abs[");
+      int closeAbs = exp.indexOf("]");
+      while (nextAbs < closeAbs && nextAbs != -1) {
+      openAbs = nextAbs;
+      nextAbs = exp.indexOf("abs[", openAbs+4);
+      }
+      String abs = exp.substring(openAbs, closeAbs+1);
+      if (openAbs != 0 && numbers.indexOf(exp.substring(openAbs-1, openAbs)) != -1) {
+      exp = exp.replace(abs, "*"+abs);
+      openAbs++;
+      closeAbs++;
+      }
+      if (closeAbs != exp.length()-1 && numbers.indexOf(exp.substring(closeAbs+1, closeAbs+2)) != -1) {
+      exp = exp.replace(abs, abs+"*");
+      }
+      String inAbs = abs.substring(4, abs.length()-1);
+      if (inAbs.indexOf("~") > -1){
+      inAbs = abs.substring(5, abs.length()-1);
+      }
+      String evaluated = pemdas(inAbs);
+      if(evaluated.substring(0,1).equals("~"))
+      evaluated = evaluated.substring(1);
+      exp = exp.replace(abs,evaluated);
+      }
+      return exp;
+      }
+    */
 
     public static void main (String[] args){
 	/*

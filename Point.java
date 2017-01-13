@@ -43,42 +43,43 @@ public class Point{
 	boolean positives = false;
 	boolean negatives = false;
 	try{
-	String eq1 = MathString.sub(eq,"x",x + halfInc);
-	//System.out.println(eq1);
-	eq1= MathString.sub(eq1,"y",y + halfInc);
-	//System.out.print(MathString.subSides(eq1));
+	    String eq1 = MathString.sub(eq,"x",x + halfInc);
+	    //System.out.println(eq1);
+	    eq1= MathString.sub(eq1,"y",y + halfInc);
+	    //System.out.print(MathString.subSides(eq1));
 
-	if(MathString.subSides(eq1) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq1) == 1)
-	    positives = true;
+	    if(MathString.subSides(eq1) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq1) == 1)
+		positives = true;
 
 	
-	String eq2 = MathString.sub(eq,"x",x - halfInc);
-	eq2 = MathString.sub(eq2,"y",y - halfInc);
-	//System.out.print(MathString.subSides(eq2));
-	if(MathString.subSides(eq2) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq2) == 1)
-	    positives = true;
+	    String eq2 = MathString.sub(eq,"x",x - halfInc);
+	    eq2 = MathString.sub(eq2,"y",y - halfInc);
+	    //System.out.print(MathString.subSides(eq2));
+	    if(MathString.subSides(eq2) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq2) == 1)
+		positives = true;
 	   
-	String eq3 = MathString.sub(eq,"x",x + halfInc);
-	eq3 = MathString.sub(eq3,"y",y - halfInc);
-	//System.out.print(MathString.subSides(eq3));
-	if(MathString.subSides(eq3) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq3) == 1)
-	    positives = true;	
+	    String eq3 = MathString.sub(eq,"x",x + halfInc);
+	    eq3 = MathString.sub(eq3,"y",y - halfInc);
+	    //System.out.print(MathString.subSides(eq3));
+	    if(MathString.subSides(eq3) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq3) == 1)
+		positives = true;	
 
-	String eq4 = MathString.sub(eq,"x",x - halfInc);
-	eq4 = MathString.sub(eq4,"y",y + halfInc);
-	//System.out.print(MathString.subSides(eq4) + "\n");
-	if(MathString.subSides(eq4) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq4) == 1)
-	    positives = true;
+	    String eq4 = MathString.sub(eq,"x",x - halfInc);
+	    eq4 = MathString.sub(eq4,"y",y + halfInc);
+	    //System.out.print(MathString.subSides(eq4) + "\n");
+	    if(MathString.subSides(eq4) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq4) == 1)
+		positives = true;
 	}
 	catch (Exception e) {}
+	checkAxis();
 	if(positives && negatives)
 	    myString = "*";
 	else{
@@ -86,9 +87,6 @@ public class Point{
 	    checkAxis();
 	}
     }
-
-    
-
 
     public void setCor(double X, double Y){
 	x = X;
@@ -101,11 +99,11 @@ public class Point{
 	return coords;
     }
     /*
-    public void scale(double scale) {
-	x *= scale;
-	y *= scale;
-	checkAxis();
-    }
+      public void scale(double scale) {
+      x *= scale;
+      y *= scale;
+      checkAxis();
+      }
     */
     public void translate(double dx, double dy) {
 	x += dx;
