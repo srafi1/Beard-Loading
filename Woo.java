@@ -25,6 +25,8 @@ public class Woo  {
 	helpText += "translate [x] [y] -- moves the graph over\n";
 	helpText += "    eg: input: translate 1 -2\n";
 	helpText += "        output: moves graph 1 point left and 2 down\n";
+	helpText += "reset -- reverts graph back to original settings\n";
+	helpText += "         ie: (zoom 20, no translations)\n";
 	helpText += "status -- prints out information about the current state of the graph\n";
 	helpText += "          ie: zoom level, translations, equation\n";
 	helpText += "NOTE: Use '~' instead of '-' for negatives\n";
@@ -82,6 +84,14 @@ public class Woo  {
 		} catch (Exception e) {
 		    System.out.println("A voice asks you to rethink your actions");
 		}
+	    } else if (graphMode && input.indexOf("reset") == 0) {
+		graph.translate(-1*totaldx, -1*totaldy);
+		graph.zoom(20);
+		graph.graph(eq);
+		totaldx = 0;
+		totaldy = 0;
+		highVal = 20;
+		System.out.println(graph);
 	    } else if (input.equals("status")) {
 		System.out.println("Equation: " + eq);
 		System.out.println("Graph mode: " + graphMode);

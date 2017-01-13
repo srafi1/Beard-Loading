@@ -79,3 +79,12 @@ Shakil Rafi :: I worked on parenthesis evaluation with Ish and cleaned up MathSt
 Ishtiaque Mahdi :: I worked on parenthesis evalutaion with Shakil and did technical stuff like add cs1 folder, overwrite .gitignore, and devlog. I also made the absolute value evaluator. 
 Mansour Elsharawy :: I worked on the devlog and made the equality checker function and edited the absolute value evaluator.
 ==============================================================
+
+2017-1-12
+--------------------------------------------------------------
+Shakil Rafi and Mansour Elsharawy :: worked on a new graphing algorithm to account for cases where the equation didn't land exactly on a point
+Shakil Rafi :: worked on expanding the driver file to include equation inputs for graphing and worked on the driver file to allow modifying the view of the graph with zoom and translate
+Mansour ELsharawy :: worked on functions in AxisGraph to properly handle zooming and graphing
+Ishtiaque Mahdi :: worked on UML diagram and helped out with algorithmic thinking in other sections
+==============================================================
+
