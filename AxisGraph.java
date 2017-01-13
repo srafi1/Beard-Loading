@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+
 public class AxisGraph  {
     private Point[][] plane;
+    private double highest;
+    public ArrayList<String> graphs = new ArrayList<String>();
 
     public AxisGraph() {
-	plane = new Point[21][21];
+	plane = new Point[41][41];
 	
 	for (int y = 0; y < plane.length; y++)
 	    for (int x = 0; x < plane[0].length; x++)
@@ -29,15 +33,24 @@ public class AxisGraph  {
 	    for(int x = 0; x < plane.length; x++){
 		double xVal = (-1 * highVal) + (x*increment);
 		plane[y][x].setCor(xVal,yVal);
+		//	if (graphs.size() != 0)
+		//    reGraphAll();
 	    }
 	}
-	    
+	highest = highVal;
     }
 
     public void graph(String eq){
+	double increment =  highest / ((plane.length - 1) / 2.0);
 	for(Point[] row: plane)
 	    for(Point p: row)
-		p.subEq(eq);
+		p.closeEnough(eq,increment / 2.0);
+	graphs.add(eq);
+    }
+
+    public void reGraphAll(){
+	for(int x = 0; x < graphs.size();x++)
+	    graph(graphs.get(x));
     }
     /*
     public void setGraph(double cx, double cy, double scale) {
@@ -59,9 +72,7 @@ public class AxisGraph  {
     */
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
-	System.out.println(a);
-	a.graph("y=x^2");
-	a.zoom(5);
+	a.graph("abs[x]+abs[y]=4");
 	System.out.println(a);
 
     }

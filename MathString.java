@@ -269,6 +269,7 @@ public class MathString {
     }//end powerLtoR
     
     public static String evaluateParens(String exp) {
+	exp = exp.replace("~(","~1(");
 	while (exp.indexOf("(") != -1) {
 	    //System.out.println("start: " + exp);
 	    int openParen = exp.indexOf("(");
@@ -320,8 +321,24 @@ public class MathString {
 	return (side1 == side2);
     }
 
+    public static int subSides(String eq){
+	int equalsIndex = eq.indexOf("=");
+	String lhs = eq.substring(0,equalsIndex);
+	String rhs = eq.substring(equalsIndex + 1);
+	double side1 = notateToDouble(pemdas(lhs));
+	double side2 = notateToDouble(pemdas(rhs));
+	if(side1 > side2)
+	    return -1;
+	else if(side1 < side2)
+	    return 1;
+	else
+	    return 0;		
+    }
+
+ 
     public static String sub(String exp,String var, double val){
 	exp = exp.replace(var, "(" + negativeNotate("" + val) + ")");
+	//System.out.println(exp);
 	return exp;	
     }
 
@@ -384,12 +401,12 @@ public class MathString {
 	*/
 	//System.out.println(pemdas(sub("x^2 + 3x + 7","x",2)));
 	//System.out.println(pemdas("(2)^2 + 3(2) + 7"));
-	
-	
+	System.out.println(subSides("1=0"));
+	/*
 	  for(String s : args){
 	  System.out.println(MathString.pemdas(s));
 	  }
-	
+	*/
 	
     }
 
