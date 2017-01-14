@@ -28,20 +28,16 @@ public class Point{
 	    myString=" ";
     }
 
-    public void subEq(String eq){
+    public boolean subEq(String eq){
 	eq = MathString.sub(eq,"x",x);
 	eq = MathString.sub(eq,"y",y);
-	if (MathString.isEqual(eq))
-	    myString = "*";
-	else{
-	    myString=" ";
-	    checkAxis();
-	}
+	return (MathString.isEqual(eq));
     }
 
     public void closeEnough(String eq,double halfInc){
 	boolean positives = false;
 	boolean negatives = false;
+	boolean hitsCenter = subEq(eq);
 	try{
 	    String eq1 = MathString.sub(eq,"x",x + halfInc);
 	    //System.out.println(eq1);
@@ -80,7 +76,7 @@ public class Point{
 	}
 	catch (Exception e) {}
 	checkAxis();
-	if(positives && negatives)
+	if ((hitsCenter)||(positives && negatives)) 
 	    myString = "*";
 	else{
 	    myString = " ";

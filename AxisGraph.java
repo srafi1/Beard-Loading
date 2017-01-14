@@ -49,8 +49,9 @@ public class AxisGraph  {
     public void graph(String eq){
 	double increment =  highest / ((plane.length - 1) / 2.0);
 	for(Point[] row: plane)
-	    for(Point p: row)
+	    for(Point p: row){
 		p.closeEnough(eq,increment / 2.0);
+	    }
 	graphs.add(eq);
     }
 
