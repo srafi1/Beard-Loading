@@ -35,50 +35,57 @@ public class Point{
     }
 
     public void closeEnough(String eq,double halfInc){
+	String center = MathString.sub(eq, "x", x);
+	center = MathString.sub(center, "y", y);
+	if (MathString.evaluateParens(center).indexOf("/0.0") != -1) {
+	    myString = " ";
+	    checkAxis();
+	    return;
+	}
+	
 	boolean positives = false;
 	boolean negatives = false;
 	boolean hitsCenter = subEq(eq);
-	try{
-	    String eq1 = MathString.sub(eq,"x",x + halfInc);
-	    //System.out.println(eq1);
-	    eq1= MathString.sub(eq1,"y",y + halfInc);
-	    //System.out.print(MathString.subSides(eq1));
 
-	    if(MathString.subSides(eq1) == -1)
-		negatives = true;
-	    else if(MathString.subSides(eq1) == 1)
-		positives = true;
+	String eq1 = MathString.sub(eq,"x",x + halfInc);
+	//System.out.println(eq1);
+	eq1= MathString.sub(eq1,"y",y + halfInc);
+	//System.out.print(MathString.subSides(eq1));
+
+	if(MathString.subSides(eq1) == -1)
+	    negatives = true;
+	else if(MathString.subSides(eq1) == 1)
+	    positives = true;
 
 	
-	    String eq2 = MathString.sub(eq,"x",x - halfInc);
-	    eq2 = MathString.sub(eq2,"y",y - halfInc);
-	    //System.out.print(MathString.subSides(eq2));
-	    if(MathString.subSides(eq2) == -1)
-		negatives = true;
-	    else if(MathString.subSides(eq2) == 1)
-		positives = true;
+	String eq2 = MathString.sub(eq,"x",x - halfInc);
+	eq2 = MathString.sub(eq2,"y",y - halfInc);
+	//System.out.print(MathString.subSides(eq2));
+	if(MathString.subSides(eq2) == -1)
+	    negatives = true;
+	else if(MathString.subSides(eq2) == 1)
+	    positives = true;
 	   
-	    String eq3 = MathString.sub(eq,"x",x + halfInc);
-	    eq3 = MathString.sub(eq3,"y",y - halfInc);
-	    //System.out.print(MathString.subSides(eq3));
-	    if(MathString.subSides(eq3) == -1)
-		negatives = true;
-	    else if(MathString.subSides(eq3) == 1)
-		positives = true;	
+	String eq3 = MathString.sub(eq,"x",x + halfInc);
+	eq3 = MathString.sub(eq3,"y",y - halfInc);
+	//System.out.print(MathString.subSides(eq3));
+	if(MathString.subSides(eq3) == -1)
+	    negatives = true;
+	else if(MathString.subSides(eq3) == 1)
+	    positives = true;	
 
-	    String eq4 = MathString.sub(eq,"x",x - halfInc);
-	    eq4 = MathString.sub(eq4,"y",y + halfInc);
-	    //System.out.print(MathString.subSides(eq4) + "\n");
-	    if(MathString.subSides(eq4) == -1)
-		negatives = true;
-	    else if(MathString.subSides(eq4) == 1)
-		positives = true;
-	}
-	catch (Exception e) {}
+	String eq4 = MathString.sub(eq,"x",x - halfInc);
+	eq4 = MathString.sub(eq4,"y",y + halfInc);
+	//System.out.print(MathString.subSides(eq4) + "\n");
+	if(MathString.subSides(eq4) == -1)
+	    negatives = true;
+	else if(MathString.subSides(eq4) == 1)
+	    positives = true;
 	checkAxis();
-	if ((hitsCenter)||(positives && negatives)) 
+
+	if (positives && negatives) 
 	    myString = "*";
-	else{
+	else {
 	    myString = " ";
 	    checkAxis();
 	}

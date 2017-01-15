@@ -57,6 +57,7 @@ public class Woo  {
 		    highVal = scale;
 		    System.out.println(graph);
 		} catch (Exception e) {
+		    e.printStackTrace();
 		    System.out.println("Use zoom in the format: zoom [scale]");
 		}
 	    } else if (graphMode && input.indexOf("translate") == 0) {
@@ -75,6 +76,7 @@ public class Woo  {
 
 		    System.out.println(graph);
 		} catch (Exception e) {
+		    e.printStackTrace();
 		    System.out.println("Use translate in the format: translate [change in x] [change in y]");
 		}
 	    } else if (graphMode && input.indexOf("reset") == 0) {
@@ -114,9 +116,8 @@ public class Woo  {
 			System.out.println("Remember: use '~' for negative numbers instead of '-'");
 		}
 	    }
+	    System.out.println();
 	}
-
-	System.out.println();
     }
     
 }

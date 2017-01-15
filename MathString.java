@@ -10,12 +10,24 @@ public class MathString {
     }
 
     public static double notateToDouble(String negNum){
+	int mult = 1;
+	
 	if (negNum.substring(0,1).equals("~")){
-	    return -1 * Double.parseDouble(negNum.substring(1));
+	    negNum = negNum.substring(1);
+	    mult = -1;
 	}
-	else{
-	    return Double.parseDouble(negNum);
+	
+	if (negNum.indexOf("E") != -1) {
+	    int eIndex = negNum.indexOf("E");
+	    String base = negNum.substring(0, eIndex);
+	    String power = negNum.substring(eIndex+1);
+	    if (power.equals(""))
+		power = "1";
+	    String num = base + "*10^" + power;
+	    negNum = pemdas(num);
 	}
+
+	return mult * Double.parseDouble(negNum);
     }
 
     public static String simpleAdd(String exp){
