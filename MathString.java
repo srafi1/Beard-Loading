@@ -382,6 +382,10 @@ public class MathString {
 	return exp;	
     }
 
+    public static String getNumbers() {
+	return numbers;
+    }
+
     /*   public static String abs(String exp){
 	 while (exp.indexOf("abs[") != -1){
 	 String exps = exp.substring(1,(exp.length()-1));
