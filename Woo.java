@@ -103,7 +103,8 @@ public class Woo  {
 		    System.out.println(graph);
 		    graphMode = true;
 		    System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
-		} catch (Exception e) {		    
+		} catch (Exception e) {
+		    e.printStackTrace();
 		    System.out.println("The equation: " + input + " is invalid. Make sure it includes at least one x or y");
 		    System.out.println();
 		}

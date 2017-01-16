@@ -51,6 +51,7 @@ public class Point{
     public void closeEnough(String eq, double halfInc){
 	String center = MathString.sub(eq, "x", x);
 	center = MathString.sub(center, "y", y);
+	boolean divZero = MathString.divZero(center);
 	center = MathString.evaluateParens(center);
 	int divZeroIndex = center.indexOf("/0.0");
 	boolean numNext;
@@ -59,8 +60,10 @@ public class Point{
 	    numNext = MathString.getNumbers().indexOf(nextChar) != -1;
 	} else
 	    numNext = false;
+
 	
-	if (divZeroIndex != -1 && halfInc > 0.001 && !numNext) {
+	
+	if (divZero || divZeroIndex != -1 && halfInc > 0.001 && !numNext) {
 	    //handle asymptotes
 	    checkAxis(halfInc);
 	    

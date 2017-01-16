@@ -386,6 +386,52 @@ public class MathString {
 	return numbers;
     }
 
+    public static boolean divZero(String eq) {
+	String lhs = eq.substring(0, eq.indexOf("="));
+	String rhs = eq.substring(eq.indexOf("=")+1);
+
+	return divZeroExp(lhs) || divZeroExp(rhs);
+    }
+
+    public static boolean divZeroExp(String exp) {
+	int index = exp.indexOf("/");
+	while (index != -1) {
+	    String divisor = exp.substring(index+1, index+2);
+	    if (divisor.equals("(")) {
+		divisor = exp.substring(index+1, findClosingParen(exp, index+1)+1);
+	    } else {
+		int end = index + 2;
+		while (numbers.indexOf(exp.charAt(end)) != -1) {
+		    end++;
+		}
+		divisor = exp.substring(index+1, end);
+	    }
+
+	    if (pemdas(divisor).equals("0.0"))
+		return true;
+	    
+	    index = exp.indexOf("/", index + 1);
+	}
+
+	return false;
+    }
+    
+    public static int findClosingParen(String exp, int open) {
+	int close = open;
+	int counter = 1;
+	while (counter > 0) {
+	    close++;
+	    char next = exp.charAt(close);
+		
+	    if (next == '(') {
+		counter++;
+	    } else if (next == ')') {
+		counter--;
+	    }
+	}
+	return close;
+    }
+    
     /*   public static String abs(String exp){
 	 while (exp.indexOf("abs[") != -1){
 	 String exps = exp.substring(1,(exp.length()-1));
