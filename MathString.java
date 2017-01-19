@@ -8,28 +8,35 @@ public class MathString {
 	else
 	    return negNum;
     }
-
+    
+    public static double notateToDouble(String negNum) {
+	if (negNum.charAt(0) == '~')
+	    return -1*Double.parseDouble(negNum.substring(1));
+	else
+	    return Double.parseDouble(negNum);
+    }
+    
+    /*
     public static double notateToDouble(String negNum){
 	int mult = 1;
-	
 	if (negNum.substring(0,1).equals("~")){
 	    negNum = negNum.substring(1);
 	    mult = -1;
 	}
 	
-	if (negNum.indexOf("E") != -1) {
+	if (negNum.indexOf("E") != -1 && false) {
 	    int eIndex = negNum.indexOf("E");
-	    String base = negNum.substring(0, eIndex);
-	    String power = negNum.substring(eIndex+1);
-	    if (power.equals(""))
-		power = "1";
-	    String num = base + "*10^" + power;
-	    negNum = pemdas(num);
+	    int baseIndex = Math.min(eIndex, 10);
+	    double  base = Double.parseDouble(negNum.substring(0, baseIndex));
+	    if (negNum.substring(eIndex+1).equals(""))
+		negNum = negNum + "1";
+	    double power = Double.parseDouble(negNum.substring(eIndex+1));
+	    return base*Math.pow(10, power)*mult;
 	}
-
 	return mult * Double.parseDouble(negNum);
     }
-
+    */
+    
     public static String simpleAdd(String exp){
 	double val1;
 	double val2;
@@ -344,6 +351,8 @@ public class MathString {
 	exp = powerLtoR(exp);
 	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
+	if (exp.indexOf("Infinity") != -1)
+	    return "Infinity";
 	//System.out.println(exp);
 	exp = addLtoR(exp);
 
@@ -351,7 +360,6 @@ public class MathString {
     }
 
     public static boolean isEqual(String eq){
-	int test = 1;
 	int equalsIndex = eq.indexOf("=");
 	String lhs = eq.substring(0,equalsIndex);
 	String rhs = eq.substring(equalsIndex + 1);
@@ -401,13 +409,14 @@ public class MathString {
 		divisor = exp.substring(index+1, findClosingParen(exp, index+1)+1);
 	    } else {
 		int end = index + 2;
-		while (numbers.indexOf(exp.charAt(end)) != -1) {
+		while (end < exp.length() && numbers.indexOf(exp.charAt(end)) != -1) {
 		    end++;
 		}
 		divisor = exp.substring(index+1, end);
 	    }
-
-	    if (pemdas(divisor).equals("0.0"))
+	    
+	    String result = pemdas(divisor);
+	    if (result.equals("Infinity") || notateToDouble(result) == 0)
 		return true;
 	    
 	    index = exp.indexOf("/", index + 1);
@@ -473,32 +482,7 @@ public class MathString {
     */
 
     public static void main (String[] args){
-	/*
-	  System.out.println(simpleAdd("6.18+~7.27"));
-	  System.out.println(simpleSubtract("6.18-7.28"));
-	  System.out.println(simpleMultiply("6.18*~7.28"));
-	  System.out.println(simpleDivide("6.18/~7.28"));
-	  System.out.println(simplePower("6^2"));
-	  System.out.println(addLtoR("3+3+4"));
-	  System.out.println(multiplyLtoR("2*3*3*5/3"));
-	  System.out.println(powerLtoR("2^2+4^2"));
-	  System.out.println(pemdas("3^2+3*2-6/2"));
-	
-	  System.out.println(pemdas("3^2 + 3*2      - 6 / ~2"));
-	  System.out.println(pemdas("3^2 - 4*3 + ~6/3"));
-       
-
-	  System.out.println(notateToDouble("~3.0"));
-	*/
-	//System.out.println(pemdas(sub("x^2 + 3x + 7","x",2)));
-	//System.out.println(pemdas("(2)^2 + 3(2) + 7"));
-	System.out.println(subSides("1=0"));
-	/*
-	  for(String s : args){
-	  System.out.println(MathString.pemdas(s));
-	  }
-	*/
-	
+	System.out.println(divZero(args[0]));
     }
 
 }

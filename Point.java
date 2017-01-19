@@ -51,6 +51,7 @@ public class Point{
     public void closeEnough(String eq, double halfInc){
 	String center = MathString.sub(eq, "x", x);
 	center = MathString.sub(center, "y", y);
+	
 	boolean divZero = MathString.divZero(center);
 	center = MathString.evaluateParens(center);
 	int divZeroIndex = center.indexOf("/0.0");
@@ -59,9 +60,7 @@ public class Point{
 	    String nextChar = center.substring(divZeroIndex+4, divZeroIndex+5);
 	    numNext = MathString.getNumbers().indexOf(nextChar) != -1;
 	} else
-	    numNext = false;
-
-	
+	    numNext = false;	
 	
 	if (divZero || divZeroIndex != -1 && halfInc > 0.001 && !numNext) {
 	    //handle asymptotes
@@ -91,44 +90,52 @@ public class Point{
 	    
 	    return;
 	}
+
+	if (MathString.isEqual(center)) {
+	    myString = "*";
+	    return;
+	}
 	
 	boolean positives = false;
 	boolean negatives = false;
 
-	String eq1 = MathString.sub(eq,"x",x + halfInc);
-	//System.out.println(eq1);
-	eq1= MathString.sub(eq1,"y",y + halfInc);
-	//System.out.print(MathString.subSides(eq1));
+	try {
+	    String eq1 = MathString.sub(eq,"x",x + halfInc);
+	    //System.out.println(eq1);
+	    eq1= MathString.sub(eq1,"y",y + halfInc);
+	    //System.out.print(MathString.subSides(eq1));
 
-	if(MathString.subSides(eq1) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq1) == 1)
-	    positives = true;
+	    if(MathString.subSides(eq1) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq1) == 1)
+		positives = true;
 
 	
-	String eq2 = MathString.sub(eq,"x",x - halfInc);
-	eq2 = MathString.sub(eq2,"y",y - halfInc);
-	//System.out.print(MathString.subSides(eq2));
-	if(MathString.subSides(eq2) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq2) == 1)
-	    positives = true;
+	    String eq2 = MathString.sub(eq,"x",x - halfInc);
+	    eq2 = MathString.sub(eq2,"y",y - halfInc);
+	    //System.out.print(MathString.subSides(eq2));
+	    if(MathString.subSides(eq2) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq2) == 1)
+		positives = true;
 	   
-	String eq3 = MathString.sub(eq,"x",x + halfInc);
-	eq3 = MathString.sub(eq3,"y",y - halfInc);
-	//System.out.print(MathString.subSides(eq3));
-	if(MathString.subSides(eq3) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq3) == 1)
-	    positives = true;	
+	    String eq3 = MathString.sub(eq,"x",x + halfInc);
+	    eq3 = MathString.sub(eq3,"y",y - halfInc);
+	    //System.out.print(MathString.subSides(eq3));
+	    if(MathString.subSides(eq3) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq3) == 1)
+		positives = true;	
 
-	String eq4 = MathString.sub(eq,"x",x - halfInc);
-	eq4 = MathString.sub(eq4,"y",y + halfInc);
-	//System.out.print(MathString.subSides(eq4) + "\n");
-	if(MathString.subSides(eq4) == -1)
-	    negatives = true;
-	else if(MathString.subSides(eq4) == 1)
-	    positives = true;
+	    String eq4 = MathString.sub(eq,"x",x - halfInc);
+	    eq4 = MathString.sub(eq4,"y",y + halfInc);
+	    //System.out.print(MathString.subSides(eq4) + "\n");
+	
+	    if(MathString.subSides(eq4) == -1)
+		negatives = true;
+	    else if(MathString.subSides(eq4) == 1)
+		positives = true;
+	} catch(Exception e) {}
 
 	if (positives && negatives) 
 	    myString = "*";
