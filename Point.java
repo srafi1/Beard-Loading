@@ -91,15 +91,16 @@ public class Point{
 	    return;
 	}
 
-	if (MathString.isEqual(center)) {
-	    myString = "*";
-	    return;
-	}
-	
 	boolean positives = false;
 	boolean negatives = false;
 
 	try {
+	    if (MathString.isEqual(center)) {
+		myString = "*";
+		return;
+	    }
+	
+
 	    String eq1 = MathString.sub(eq,"x",x + halfInc);
 	    //System.out.println(eq1);
 	    eq1= MathString.sub(eq1,"y",y + halfInc);
@@ -137,12 +138,14 @@ public class Point{
 		positives = true;
 	} catch(Exception e) {}
 
+
 	if (positives && negatives) 
 	    myString = "*";
 	else {
 	    myString = " ";
 	    checkAxis(halfInc);
 	}
+	
     }
 
     public void setCor(double X, double Y){
