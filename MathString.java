@@ -17,24 +17,24 @@ public class MathString {
     }
     
     /*
-    public static double notateToDouble(String negNum){
-	int mult = 1;
-	if (negNum.substring(0,1).equals("~")){
-	    negNum = negNum.substring(1);
-	    mult = -1;
-	}
+      public static double notateToDouble(String negNum){
+      int mult = 1;
+      if (negNum.substring(0,1).equals("~")){
+      negNum = negNum.substring(1);
+      mult = -1;
+      }
 	
-	if (negNum.indexOf("E") != -1 && false) {
-	    int eIndex = negNum.indexOf("E");
-	    int baseIndex = Math.min(eIndex, 10);
-	    double  base = Double.parseDouble(negNum.substring(0, baseIndex));
-	    if (negNum.substring(eIndex+1).equals(""))
-		negNum = negNum + "1";
-	    double power = Double.parseDouble(negNum.substring(eIndex+1));
-	    return base*Math.pow(10, power)*mult;
-	}
-	return mult * Double.parseDouble(negNum);
-    }
+      if (negNum.indexOf("E") != -1 && false) {
+      int eIndex = negNum.indexOf("E");
+      int baseIndex = Math.min(eIndex, 10);
+      double  base = Double.parseDouble(negNum.substring(0, baseIndex));
+      if (negNum.substring(eIndex+1).equals(""))
+      negNum = negNum + "1";
+      double power = Double.parseDouble(negNum.substring(eIndex+1));
+      return base*Math.pow(10, power)*mult;
+      }
+      return mult * Double.parseDouble(negNum);
+      }
     */
     
     public static String simpleAdd(String exp){
@@ -309,7 +309,53 @@ public class MathString {
 	    exp = exp.substring(0, openParen) + pemdas(inParens) + exp.substring(closeParen + 1);
 	    //System.out.println("end: " + exp);
 	}
+	return "(" + exp + ")";
+    }
+
+    public static String evaluateFuncs(String exp) {
+	exp = evaluateFunc(exp, "abs");
+	exp = evaluateFunc(exp, "sin");
+	exp = evaluateFunc(exp, "cos");
+	exp = evaluateFunc(exp, "tan");
 	return exp;
+    }
+
+    public static String evaluateFunc(String exp, String func) {
+	exp = exp.replace("~" + func + "[","~1" + func +"[");
+	while (exp.indexOf(func + "[") != -1) {
+	    int openFunc = exp.indexOf(func + "[");
+	    int nextFunc = exp.indexOf(func + "[", openFunc+1);
+	    int closeFunc = exp.indexOf("]");
+	    while (nextFunc < closeFunc && nextFunc != -1) {
+		openFunc = nextFunc;
+		nextFunc = exp.indexOf(func + "[", openFunc + 1);
+	    }
+	    String wholeFunc = exp.substring(openFunc, closeFunc + 1);
+	    if (openFunc != 0 && numbers.indexOf(exp.substring(openFunc-1, openFunc)) != -1) {
+		exp = exp.substring(0, openFunc) + "*" + exp.substring(openFunc);
+		openFunc++;
+		closeFunc++;
+	    }
+	    if (closeFunc != exp.length()-1 && numbers.indexOf(exp.substring(closeFunc+1, closeFunc+2)) != -1) {
+		exp = exp.substring(0, closeFunc+1) + "*" + exp.substring(closeFunc+1);
+	    }
+	    String inFunc = wholeFunc.substring(4, wholeFunc.length()-1);
+	    String result = pemdas(inFunc);
+	    if (func.equals("abs")) {
+		if (result.charAt(0) == '~')
+		    result = result.substring(1);
+	    } else if (func.equals("sin")) {
+		result = "" + Math.sin(notateToDouble(result));
+	    } else if (func.equals("cos")) {
+		result = "" + Math.cos(notateToDouble(result));
+	    } else if (func.equals("tan")) {
+		result = "" + Math.tan(notateToDouble(result));
+	    }	    
+	    exp = exp.substring(0, openFunc) + result + exp.substring(closeFunc + 1);
+	    //System.out.println("end: " + exp);
+	}
+	return exp;
+	
     }
 
     public static String evaluateAbs(String exp) {
@@ -347,7 +393,7 @@ public class MathString {
 	exp = exp.replace(" ", "");
 	//System.out.println(exp);
 	exp = evaluateParens(exp);
-	exp = evaluateAbs(exp);
+	exp = evaluateFuncs(exp);
 	exp = powerLtoR(exp);
 	//System.out.println(exp);
 	exp = multiplyLtoR(exp);
