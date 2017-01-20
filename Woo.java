@@ -81,7 +81,7 @@ public class Woo  {
 		}
 	    } else if (graphMode && input.indexOf("reset") == 0) {
 		graph.translate(-1*totaldx, -1*totaldy);
-		graph.zoom(20);
+		graph.zoom(10);
 		graph.graph(eq);
 		totaldx = 0;
 		totaldy = 0;
