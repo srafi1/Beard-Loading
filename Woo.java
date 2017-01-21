@@ -112,6 +112,7 @@ public class Woo  {
 		try {
 		    System.out.println(MathString.pemdas(input));
 		} catch(Exception e) {
+		    e.printStackTrace();
 		    System.out.println("The expression: " + input + " is invalid");
 		    if (input.indexOf("--") != -1)
 			System.out.println("Remember: use '~' for negative numbers instead of '-'");
