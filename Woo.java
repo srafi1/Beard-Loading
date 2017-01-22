@@ -102,12 +102,30 @@ public class Woo  {
 		graph.clear();
 		System.out.println("Graph cleared!");
 
-	     }else if (input.indexOf("[x]") != -1 && input.indexOf("] =") != -1 && input.indexOf("=") != -1){
-		input = input.replace("X","x");
-		input = input.replace("Y","y");
-		graph.store(input);
-		System.out.println("Function has been stored");
+	    }else if (input.indexOf("[x]") != -1 && input.indexOf("] =") != -1 || input.indexOf("]=") != -1 && input.indexOf("=") != -1){
+		try{
+		    input = input.replace("X","x");
+		    input = input.replace("Y","y");
+		    graph.store(input);
+		    if (input.indexOf("[x]") != -1 && (falpha.contains(input.substring(input.indexOf("[x]")-1,input.indexOf("[x]"))))){
+			input = graph.function(input);
+			input = input.substring(0,input.indexOf("="));
+		    }
 
+		    //	String name = input.substring(0,input.indexOf("="));
+		    //	System.out.println(name);
+
+		    graph.graphAll("y = " + input);
+
+		    System.out.println(graph);
+		    graphMode = true;
+		    System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    System.out.println("The function: " + input + " is invalid.");
+		    System.out.println();
+		}				    
+		    
 	    } else if (input.indexOf("=") != -1 && (input.indexOf("y") != -1 || input.indexOf("x") != -1)) {
 		try {
 		    input = input.replace("X","x");

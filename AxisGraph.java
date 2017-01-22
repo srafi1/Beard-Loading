@@ -76,6 +76,17 @@ public class AxisGraph  {
 	refresh();
     }
 
+    public String whitespace(String input){
+	while ( input.indexOf(" ") != -1){
+	    String part1 = input.substring(0,input.indexOf(" "));
+
+	    String part2 = input.substring(input.indexOf(" ")+1);
+
+	    input = part1 + part2;
+	}
+	return input;
+    }
+
     public void store(String eq){
 	String var = eq.substring(eq.indexOf("[x]")-1,eq.indexOf("[x]"));
 	for(int i = 0; i < storage.size(); i++){
@@ -90,6 +101,7 @@ public class AxisGraph  {
     }
 
      public String function(String input){
+	 input = whitespace(input);
 	while(input.indexOf("[x]") != -1){
 	    String var = findname(input);
 	    String replaced = input.substring(input.indexOf("[x]")-1, input.indexOf("[x]")+3);
@@ -109,13 +121,9 @@ public class AxisGraph  {
 	for(int i = 0; i < storage.size(); i++){
 	    if(name.equals(findname(storage.get(i)))){
 		String fexp = storage.get(i);
-		exp = fexp.substring(fexp.indexOf("=") + 1);
-		if (exp.substring(1,2).equals(" ")){
-			exp ="(" +  exp.substring(2) + ")";
-		}
-		else{
-		    exp = "(" + exp + ")";
-		}
+		exp = fexp.substring(fexp.indexOf("=")+1);
+		exp = "(" + exp + ")";
+		
 	    }
 	}
 	return exp;
@@ -149,8 +157,8 @@ public class AxisGraph  {
 	System.out.println(a);
 	System.out.println(a.graphs);*/
 	a.storage.add("f[x] = x^2");
-	a.storage.add("f[h] = x + 1");
-	System.out.println(a.findexp("x"));
+	a.storage.add("g[x] = x + 1");
+	//	System.out.println(a.findexp("x"));
 	System.out.println(a.function("y = 3f[x]"));
     }
     
