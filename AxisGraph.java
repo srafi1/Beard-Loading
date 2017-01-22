@@ -112,6 +112,12 @@ public class AxisGraph  {
 	    if(name.equals(findname(storage.get(i)))){
 		String fexp = storage.get(i);
 		exp = fexp.substring(fexp.indexOf("=") + 1);
+		if (exp.substring(1,2).equals(" ")){
+			exp ="(" +  exp.substring(2) + ")";
+		}
+		else{
+		    exp = "(" + exp + ")";
+		}
 	    }
 	}
 	return exp;
@@ -139,13 +145,15 @@ public class AxisGraph  {
     */
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
-	a.graphAll("y=x^2");
+	/*	a.graphAll("y=x^2");
 	System.out.println(a);
 	a.graphAll("y=x");
 	System.out.println(a);
-	System.out.println(a.graphs);
-	
-
+	System.out.println(a.graphs);*/
+	a.storage.add("f[x] = x^2");
+	a.storage.add("f[h] = x + 1");
+	System.out.println(a.findexp("x"));
+	System.out.println(a.function("y = 3f[x]"));
     }
     
 }
