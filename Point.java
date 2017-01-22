@@ -91,9 +91,12 @@ public class Point{
     //closeEnough but with colors
     public void closeEnough_Color(String eq, double halfInc, int graphNum) {
 	boolean graphed = myString.equals("*");
+	myString = " ";
 	closeEnough(eq, halfInc);
-	if (myString.equals("*") && !graphed)
+	if (myString.equals("*"))
 	    setColor(graphNum);
+	else if (graphed)
+	    myString = "*";
     }
 
     //long and complicated algorithm that determines whether or not a point is close enough to the curve of a graph
