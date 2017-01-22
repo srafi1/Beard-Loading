@@ -324,12 +324,7 @@ public class MathString {
 	exp = exp.replace("~" + func + "[","~1" + func +"[");
 	while (exp.indexOf(func + "[") != -1) {
 	    int openFunc = exp.indexOf(func + "[");
-	    int nextFunc = exp.indexOf(func + "[", openFunc+1);
-	    int closeFunc = exp.indexOf("]");
-	    while (nextFunc < closeFunc && nextFunc != -1) {
-		openFunc = nextFunc;
-		nextFunc = exp.indexOf(func + "[", openFunc + 1);
-	    }
+	    int closeFunc = findClosingBracket(exp, openFunc + func.length());
 	    String wholeFunc = exp.substring(openFunc, closeFunc + 1);
 	    if (openFunc != 0 && numbers.indexOf(exp.substring(openFunc-1, openFunc)) != -1) {
 		exp = exp.substring(0, openFunc) + "*" + exp.substring(openFunc);
@@ -339,7 +334,7 @@ public class MathString {
 	    if (closeFunc != exp.length()-1 && numbers.indexOf(exp.substring(closeFunc+1, closeFunc+2)) != -1) {
 		exp = exp.substring(0, closeFunc+1) + "*" + exp.substring(closeFunc+1);
 	    }
-	    String inFunc = wholeFunc.substring(4, wholeFunc.length()-1);
+	    String inFunc = wholeFunc.substring(func.length()+1, wholeFunc.length()-1);
 	    String result = pemdas(inFunc);
 	    if (func.equals("abs")) {
 		if (result.charAt(0) == '~')
@@ -355,6 +350,22 @@ public class MathString {
 	    //System.out.println("end: " + exp);
 	}
 	return exp;
+    }
+    
+    public static int findClosingBracket(String exp, int open) {
+	int close = open;
+	int counter = 1;
+	while (counter > 0) {
+	    close++;
+	    char next = exp.charAt(close);
+		
+	    if (next == '[') {
+		counter++;
+	    } else if (next == ']') {
+		counter--;
+	    }
+	}
+	return close;
     }
 
     public static String pemdas(String exp){
