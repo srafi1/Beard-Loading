@@ -80,9 +80,12 @@ public class Point{
 
     public void closeEnough_Color(String eq, double halfInc, int graphNum) {
 	boolean graphed = myString.equals("*");
+	myString = " ";
 	closeEnough(eq, halfInc);
-	if (myString.equals("*") && !graphed)
+	if (myString.equals("*"))
 	    setColor(graphNum);
+	else if (graphed)
+	    myString = "*";
     }
     
     public void closeEnough(String eq, double halfInc) {
