@@ -77,13 +77,12 @@ public class AxisGraph  {
     }
 
     public void store(String eq){
-	String var = eq.substring(eq.indexOf("f["),eq.indexOf("f[")+3);
+	String var = eq.substring(eq.indexOf("[x]")-1,eq.indexOf("[x]"));
 	for(int i = 0; i < storage.size(); i++){
-	    Boolean truth = var.equals((storage.get(i)).substring(eq.indexOf("f["),eq.indexOf("f[")+3));	   
+	    Boolean truth = var.equals((storage.get(i)).substring(eq.indexOf("[x]")-1,eq.indexOf("[x]")));	   
 	    if (truth == true)
 	    {
 		storage.remove(i);
-		System.out.println(i);
 	    }
 	}
 	storage.add(eq);
@@ -91,18 +90,17 @@ public class AxisGraph  {
     }
 
      public String function(String input){
-	while(input.indexOf("f[") != -1){
+	while(input.indexOf("[x]") != -1){
 	    String var = findname(input);
-	    String replaced = input.substring(input.indexOf("f["), input.indexOf("]")+1);
+	    String replaced = input.substring(input.indexOf("[x]")-1, input.indexOf("[x]")+3);
 	    input = input.replace(replaced,findexp(var));
 	}
-	System.out.println(input);
 	return input;
     }
     
 
     public String findname(String input){
-	 String fname = input.substring(input.indexOf("f[")+2,input.indexOf("]"));
+	 String fname = input.substring(input.indexOf("[x]")-1,input.indexOf("[x]"));
 	 return fname;
     }
 

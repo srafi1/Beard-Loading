@@ -38,15 +38,17 @@ public class Woo  {
 	double highVal = 10;
 	double totaldx = 0;
 	double totaldy = 0;
-	
+	String falpha = "a b c d e f g h i j k l m o p q r t u v w z";
+
 	while (true) {
 	    System.out.print("What to do...? (input 'help' for help or 'quit' to exit)\n>");
 	    String input = in.readString();
 
-	     if (input.indexOf("f[") != -1 && input.indexOf("]") != -1 && input.indexOf("y") != -1){
+	    if (input.indexOf("[x]") != -1 && (falpha.contains(input.substring(input.indexOf("[x]")-1,input.indexOf("[x]")))) && (input.indexOf("y") != -1)){
 		input = graph.function(input);
+		System.out.println(input);
 	    }
-
+	    
 	    if (input.equals("quit") || input.equals("exit"))
 		break;
 	    else if (input.equals("help"))
@@ -100,7 +102,7 @@ public class Woo  {
 		graph.clear();
 		System.out.println("Graph cleared!");
 
-	     }else if (input.indexOf("f[") != -1 && input.indexOf("] =") != -1 && input.indexOf("=") != -1){
+	     }else if (input.indexOf("[x]") != -1 && input.indexOf("] =") != -1 && input.indexOf("=") != -1){
 		input = input.replace("X","x");
 		input = input.replace("Y","y");
 		graph.store(input);
