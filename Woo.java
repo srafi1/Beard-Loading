@@ -92,6 +92,9 @@ public class Woo  {
 		System.out.println("Graph mode: " + graphMode);
 		System.out.println("Zoom level: " + highVal);
 		System.out.println("Total translations: " + totaldx + " " + totaldy);
+	    } else if (input.equals("clear")) {
+		graph.clear();
+		System.out.println("Graph cleared!");
 	    } else if (input.indexOf("=") != -1 && (input.indexOf("y") != -1 || input.indexOf("x") != -1)) {
 		try {
 		    input = input.replace("X","x");

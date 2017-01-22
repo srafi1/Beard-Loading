@@ -48,33 +48,33 @@ public class AxisGraph  {
 	refresh();
     }
     
-    public void graph(String eq){
+    public void graph(String eq, int num){
 	double increment =  highest / ((plane.length - 1) / 2.0);
 	for(Point[] row: plane)
 	    for(Point p: row)
-		p.closeEnough(eq,increment / 2.0);
+		p.closeEnough_Color(eq, increment / 2.0, num);
     }
 
     public void graphAll(String eq){
 	graphs.add(eq);
 	for(int x = 0; x < graphs.size();x++)
-	    graph(graphs.get(x));
+	    graph(graphs.get(x), x);
     }
 
     public void refresh(){
 	for(Point[] row: plane){
 	    for(Point p: row){
-		p.myString = " ";
+		p.reset();
 		p.checkAxis();
 	    }
 	}
-	/*
-	while(graphs.size() != 0){
-	    graphs.remove(0);
-	}
-	*/
     }
 
+    public void clear() {
+	graphs = new ArrayList<String>();
+	refresh();
+    }
+    
     /*
     public void setGraph(double cx, double cy, double scale) {
 	for (int y = 0; y < plane.length; y++)

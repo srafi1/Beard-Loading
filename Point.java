@@ -1,7 +1,7 @@
 public class Point{
-    public double x,y;
-    public String myString;
-
+    private double x,y;
+    private String myString;
+    private String myColor;
     public Point(){
 	this(0, 0);
 	myString = " ";
@@ -14,7 +14,7 @@ public class Point{
     }
 
     public String toString() {
-	return myString;
+	return myColor + myString + ANSI.RESET;
     }
 
     public void checkAxis() {
@@ -24,6 +24,12 @@ public class Point{
 	    myString="|";
 	else if(y==0)
 	    myString="-";
+	myColor = ANSI.WHITE;
+    }
+
+    public void reset() {
+	myString = " ";
+	myColor = ANSI.WHITE;
     }
 
     public void checkAxis(double halfInc) {
@@ -46,7 +52,40 @@ public class Point{
 	return (MathString.isEqual(eq));
     }
 
-    public void closeEnough(String eq, double halfInc){
+    public void setColor(int graphNum) {
+	switch (graphNum) {
+	case 0:
+	    myColor = ANSI.WHITE;
+	    break;
+	case 1:
+	    myColor = ANSI.RED;
+	    break;
+	case 2:
+	    myColor = ANSI.GREEN;
+	    break;
+	case 3:
+	    myColor = ANSI.YELLOW;
+	    break;
+	case 4:
+	    myColor = ANSI.BLUE;
+	    break;
+	case 5:
+	    myColor = ANSI.PURPLE;
+	    break;
+	case 6:
+	    myColor = ANSI.CYAN;
+	    break;
+	}
+    }
+
+    public void closeEnough_Color(String eq, double halfInc, int graphNum) {
+	boolean graphed = myString.equals("*");
+	closeEnough(eq, halfInc);
+	if (myString.equals("*") && !graphed)
+	    setColor(graphNum);
+    }
+    
+    public void closeEnough(String eq, double halfInc) {
 	String center = MathString.sub(eq, "x", x);
 	center = MathString.sub(center, "y", y);
 	
@@ -137,10 +176,9 @@ public class Point{
 	} catch(Exception e) {}
 
 
-	if (positives && negatives) 
+	if (positives && negatives) {
 	    myString = "*";
-	else {
-	    //	    myString = " ";
+	} else {
 	    checkAxis(halfInc);
 	}
 	
