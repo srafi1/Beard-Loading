@@ -4,6 +4,7 @@ public class AxisGraph  {
     private Point[][] plane;
     private double highest;
     public ArrayList<String> graphs = new ArrayList<String>();
+    public ArrayList<String> storage = new ArrayList<String>();
 
     public AxisGraph() {
 	plane = new Point[41][41];
@@ -74,6 +75,49 @@ public class AxisGraph  {
 	graphs = new ArrayList<String>();
 	refresh();
     }
+
+    public void store(String eq){
+	String var = eq.substring(eq.indexOf("f["),eq.indexOf("f[")+3);
+	for(int i = 0; i < storage.size(); i++){
+	    Boolean truth = var.equals((storage.get(i)).substring(eq.indexOf("f["),eq.indexOf("f[")+3));	   
+	    if (truth == true)
+	    {
+		storage.remove(i);
+		System.out.println(i);
+	    }
+	}
+	storage.add(eq);
+
+    }
+
+     public String function(String input){
+	while(input.indexOf("f[") != -1){
+	    String var = findname(input);
+	    String replaced = input.substring(input.indexOf("f["), input.indexOf("]")+1);
+	    input = input.replace(replaced,findexp(var));
+	}
+	System.out.println(input);
+	return input;
+    }
+    
+
+    public String findname(String input){
+	 String fname = input.substring(input.indexOf("f[")+2,input.indexOf("]"));
+	 return fname;
+    }
+
+    public String findexp(String name){
+	String exp = "";
+	for(int i = 0; i < storage.size(); i++){
+	    if(name.equals(findname(storage.get(i)))){
+		String fexp = storage.get(i);
+		exp = fexp.substring(fexp.indexOf("=") + 1);
+	    }
+	}
+	return exp;
+    }
+
+    
     
     /*
     public void setGraph(double cx, double cy, double scale) {

@@ -43,6 +43,10 @@ public class Woo  {
 	    System.out.print("What to do...? (input 'help' for help or 'quit' to exit)\n>");
 	    String input = in.readString();
 
+	     if (input.indexOf("f[") != -1 && input.indexOf("]") != -1 && input.indexOf("y") != -1){
+		input = graph.function(input);
+	    }
+
 	    if (input.equals("quit") || input.equals("exit"))
 		break;
 	    else if (input.equals("help"))
@@ -95,6 +99,13 @@ public class Woo  {
 	    } else if (input.equals("clear")) {
 		graph.clear();
 		System.out.println("Graph cleared!");
+
+	     }else if (input.indexOf("f[") != -1 && input.indexOf("] =") != -1 && input.indexOf("=") != -1){
+		input = input.replace("X","x");
+		input = input.replace("Y","y");
+		graph.store(input);
+		System.out.println("Function has been stored");
+
 	    } else if (input.indexOf("=") != -1 && (input.indexOf("y") != -1 || input.indexOf("x") != -1)) {
 		try {
 		    input = input.replace("X","x");
