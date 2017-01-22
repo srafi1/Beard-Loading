@@ -24,8 +24,6 @@ public class Point{
 	    myString="|";
 	else if(y==0)
 	    myString="-";
-	else
-	    myString=" ";
     }
 
     public void checkAxis(double halfInc) {
@@ -38,8 +36,8 @@ public class Point{
 	    myString = "|";
 	else if (nearY)
 	    myString = "-";
-	else
-	    myString = " ";
+	//	else
+	//  myString = " ";
     }
     
     public boolean subEq(String eq){
@@ -142,7 +140,7 @@ public class Point{
 	if (positives && negatives) 
 	    myString = "*";
 	else {
-	    myString = " ";
+	    //	    myString = " ";
 	    checkAxis(halfInc);
 	}
 	

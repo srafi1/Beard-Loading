@@ -53,7 +53,7 @@ public class Woo  {
 		    double scale = Double.parseDouble(input.substring(5));
 		    graph.zoom(scale);
 		    graph.translate(totaldx, totaldy);
-		    graph.graph(eq);
+		    graph.graphAll(eq);
 		    highVal = scale;
 		    System.out.println(graph);
 		} catch (Exception e) {
@@ -69,7 +69,7 @@ public class Woo  {
 		    double dy = Double.parseDouble(coords[1]);
 
 		    graph.translate(dx, dy);
-		    graph.graph(eq);
+		    graph.graphAll(eq);
 
 		    totaldx += dx;
 		    totaldy += dy;
@@ -82,7 +82,7 @@ public class Woo  {
 	    } else if (graphMode && input.indexOf("reset") == 0) {
 		graph.translate(-1*totaldx, -1*totaldy);
 		graph.zoom(10);
-		graph.graph(eq);
+		graph.graphAll(eq);
 		totaldx = 0;
 		totaldy = 0;
 		highVal = 20;
@@ -98,7 +98,7 @@ public class Woo  {
 		    input = input.replace("Y","y");
 
 		    eq = input;
-		    graph.graph(input);
+		    graph.graphAll(input);
 
 		    System.out.println(graph);
 		    graphMode = true;

@@ -37,6 +37,7 @@ public class AxisGraph  {
 		//    reGraphAll();
 	    }
 	}
+	refresh();
 	highest = highVal;
     }
 
@@ -44,6 +45,7 @@ public class AxisGraph  {
 	for (Point[] row : plane)
 	    for (Point p : row)
 		p.translate(dx, dy);
+	refresh();
     }
     
     public void graph(String eq){
@@ -51,14 +53,28 @@ public class AxisGraph  {
 	for(Point[] row: plane)
 	    for(Point p: row)
 		p.closeEnough(eq,increment / 2.0);
-	    
-	graphs.add(eq);
     }
 
-    public void reGraphAll(){
+    public void graphAll(String eq){
+	graphs.add(eq);
 	for(int x = 0; x < graphs.size();x++)
 	    graph(graphs.get(x));
     }
+
+    public void refresh(){
+	for(Point[] row: plane){
+	    for(Point p: row){
+		p.myString = " ";
+		p.checkAxis();
+	    }
+	}
+	/*
+	while(graphs.size() != 0){
+	    graphs.remove(0);
+	}
+	*/
+    }
+
     /*
     public void setGraph(double cx, double cy, double scale) {
 	for (int y = 0; y < plane.length; y++)
@@ -79,8 +95,12 @@ public class AxisGraph  {
     */
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
-	a.graph("y=x^2");
+	a.graphAll("y=x^2");
 	System.out.println(a);
+	a.graphAll("y=x");
+	System.out.println(a);
+	System.out.println(a.graphs);
+	
 
     }
     
