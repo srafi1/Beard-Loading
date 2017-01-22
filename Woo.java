@@ -88,7 +88,7 @@ public class Woo  {
 		highVal = 20;
 		System.out.println(graph);
 	    } else if (input.equals("status")) {
-		System.out.println("Equation: " + eq);
+		System.out.println("Equations: " + graph.graphs);
 		System.out.println("Graph mode: " + graphMode);
 		System.out.println("Zoom level: " + highVal);
 		System.out.println("Total translations: " + totaldx + " " + totaldy);
