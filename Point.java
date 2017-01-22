@@ -2,21 +2,26 @@ public class Point{
     private double x,y;
     private String myString;
     private String myColor;
+
+    //default constructor, bland
     public Point(){
 	this(0, 0);
 	myString = " ";
     }
 
+    //overloaded constructor, takes coordinate values
     public Point (double xIn, double yIn){
 	x = xIn;
 	y = yIn;
 	checkAxis();
     }
 
+    //toString prints myString with whatever color the point is.
     public String toString() {
 	return myColor + myString + ANSI.RESET;
     }
 
+    //determines if a point is on x or y axis and sets myString accordingly
     public void checkAxis() {
 	if(x==0 && y==0)
 	    myString="+";
@@ -27,11 +32,13 @@ public class Point{
 	myColor = ANSI.WHITE;
     }
 
+    //makes myString blank
     public void reset() {
 	myString = " ";
 	myColor = ANSI.WHITE;
     }
 
+    //this version of checkAxis does a "close enough" to axis sorta thing
     public void checkAxis(double halfInc) {
 	boolean nearX = x < halfInc && x > -1*halfInc;
 	boolean nearY = y < halfInc && y > -1*halfInc;
@@ -45,13 +52,16 @@ public class Point{
 	//	else
 	//  myString = " ";
     }
-    
+
+    //substitues its coordinates into a given equation and checks for equality
     public boolean subEq(String eq){
 	eq = MathString.sub(eq,"x",x);
 	eq = MathString.sub(eq,"y",y);
 	return (MathString.isEqual(eq));
     }
 
+
+    //sets myColor variable using ANSI codes
     public void setColor(int graphNum) {
 	switch (graphNum) {
 	case 0:
@@ -77,14 +87,16 @@ public class Point{
 	    break;
 	}
     }
-
+    
+    //closeEnough but with colors
     public void closeEnough_Color(String eq, double halfInc, int graphNum) {
 	boolean graphed = myString.equals("*");
 	closeEnough(eq, halfInc);
 	if (myString.equals("*") && !graphed)
 	    setColor(graphNum);
     }
-    
+
+    //long and complicated algorithm that determines whether or not a point is close enough to the curve of a graph
     public void closeEnough(String eq, double halfInc) {
 	String center = MathString.sub(eq, "x", x);
 	center = MathString.sub(center, "y", y);
@@ -184,22 +196,27 @@ public class Point{
 	
     }
 
+    //mutator method for x and y coordinates
     public void setCor(double X, double Y){
 	x = X;
 	y = Y;
     }
 
+    //accessor method for x and y coordinates
     public double[] getCor() {
 	double[] coords = {x, y};
 	return coords;
     }
-    
+
+    //moves a point a certain distance
     public void translate(double dx, double dy) {
 	x += dx;
 	y += dy;
 	checkAxis();
     }
 
+
+    //main method for testing
     public static void main(String[] args) {
 	Point p = new Point(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
 	

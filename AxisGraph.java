@@ -6,6 +6,7 @@ public class AxisGraph  {
     public ArrayList<String> graphs = new ArrayList<String>();
     public ArrayList<String> storage = new ArrayList<String>();
 
+    //constructor method, makes a 41 by 41 array of Points and autozooms to 10
     public AxisGraph() {
 	plane = new Point[41][41];
 	
@@ -14,7 +15,8 @@ public class AxisGraph  {
 		plane[y][x] = new Point();
 	zoom(10);
     }
-
+    
+    //prints out the 2D array of points
     public String toString() {
 	String retStr = "";
 
@@ -27,6 +29,8 @@ public class AxisGraph  {
 	return retStr;
     }
 
+
+    //zoom determines the spacing of each point given the highest values of both x and y
     public void zoom(double highVal){
 	double increment = highVal / ((plane.length - 1) / 2.0);
 	for (int y = 0; y < plane.length; y++){
@@ -42,13 +46,15 @@ public class AxisGraph  {
 	highest = highVal;
     }
 
+    //runs Point.translate(double,double) on all points, moving the entire graph.
     public void translate(double dx, double dy) {
 	for (Point[] row : plane)
 	    for (Point p : row)
 		p.translate(dx, dy);
 	refresh();
     }
-    
+
+    //runa closeEnough on all the Points, forming a graph
     public void graph(String eq, int num){
 	double increment =  highest / ((plane.length - 1) / 2.0);
 	for(Point[] row: plane)
@@ -56,12 +62,14 @@ public class AxisGraph  {
 		p.closeEnough_Color(eq, increment / 2.0, num);
     }
 
+    //graphs new given equation as well as all of the previous ones for graph overlay.
     public void graphAll(String eq){
 	graphs.add(eq);
 	for(int x = 0; x < graphs.size();x++)
 	    graph(graphs.get(x), x);
     }
 
+    //runs reset() on all Points
     public void refresh(){
 	for(Point[] row: plane){
 	    for(Point p: row){
@@ -71,11 +79,14 @@ public class AxisGraph  {
 	}
     }
 
+
+    //clear gets rid of everything, all saved points and everything
     public void clear() {
 	graphs = new ArrayList<String>();
 	refresh();
     }
 
+    //
     public String whitespace(String input){
 	while ( input.indexOf(" ") != -1){
 	    String part1 = input.substring(0,input.indexOf(" "));
@@ -87,11 +98,12 @@ public class AxisGraph  {
 	return input;
     }
 
+    //
     public void store(String eq){
 	String var = eq.substring(eq.indexOf("[x]")-1,eq.indexOf("[x]"));
 	for(int i = 0; i < storage.size(); i++){
 	    Boolean truth = var.equals((storage.get(i)).substring(eq.indexOf("[x]")-1,eq.indexOf("[x]")));	   
-	    if (truth == true)
+	    if (truth)
 	    {
 		storage.remove(i);
 	    }
@@ -100,6 +112,7 @@ public class AxisGraph  {
 
     }
 
+    //
      public String function(String input){
 	 input = whitespace(input);
 	while(input.indexOf("[x]") != -1){
@@ -111,11 +124,13 @@ public class AxisGraph  {
     }
     
 
+    //
     public String findname(String input){
 	 String fname = input.substring(input.indexOf("[x]")-1,input.indexOf("[x]"));
 	 return fname;
     }
 
+    //
     public String findexp(String name){
 	String exp = "";
 	for(int i = 0; i < storage.size(); i++){
@@ -149,6 +164,8 @@ public class AxisGraph  {
 	setGraph(cx, cy, 1);
     }
     */
+
+    //main method for testing
     public static void main(String[] args) {
 	AxisGraph a = new AxisGraph();
 	/*	a.graphAll("y=x^2");

@@ -1,14 +1,17 @@
 public class MathString {
-
+    
+    //global variable saves known number characters
     private static final String numbers = "1234567890.~";
 
+    //converts a doubleString such as "-3.0" to the "~" standard
     public static String negativeNotate(String negNum){
 	if(negNum.substring(0,1).equals( "-"))
 	    return "~" + negNum.substring(1);
 	else
 	    return negNum;
     }
-    
+
+    //takes a positive or negative number in string form and returns its double value.
     public static double notateToDouble(String negNum) {
 	if (negNum.charAt(0) == '~')
 	    return -1*Double.parseDouble(negNum.substring(1));
@@ -36,7 +39,8 @@ public class MathString {
       return mult * Double.parseDouble(negNum);
       }
     */
-    
+
+    //performs a simple addition of a string (Eg: "5+4") and returns string representation of answer.
     public static String simpleAdd(String exp){
 	double val1;
 	double val2;
@@ -49,7 +53,8 @@ public class MathString {
 	val2 = notateToDouble(arg2);
 	return negativeNotate("" + (val1 + val2));	
     }
-    
+
+    //simpleAdd but with SUBTRACTION!!!
     public static String simpleSubtract(String exp){
 	double val1;
 	double val2;
@@ -63,6 +68,7 @@ public class MathString {
 	return negativeNotate("" + (val2 - val1));
     }
 
+    //simpleAdd but with MULTIPLICATION!!!
     public static String simpleMultiply(String exp){
 	double val1;
 	double val2;
@@ -76,6 +82,7 @@ public class MathString {
 	return negativeNotate("" + (val1 * val2));
     }
     
+    //simpleAdd but with DIVISION!!!
     public static String simpleDivide(String exp){
 	double val1;
 	double val2;
@@ -89,6 +96,7 @@ public class MathString {
 	return negativeNotate("" + (val2 / val1));	
     }
 
+    //simpleAdd but with POWERS!!!
     public static String simplePower(String exp){
 	double val1;
 	double val2;
@@ -101,7 +109,8 @@ public class MathString {
 	val2 = notateToDouble(arg2);
 	return negativeNotate("" + Math.pow(val2,val1));
     }
-
+    
+    //Performs any add/subtract operations from left to right of a string
     public static String addLtoR(String exp){
 	if(exp.indexOf("+") != -1 || exp.indexOf("-") != -1){
 	    int opIndex = Math.min(exp.indexOf("+"),exp.indexOf("-"));
@@ -164,7 +173,7 @@ public class MathString {
     }//end addLtoR
 
 
-
+    //addLtoR but with MULTIPLICATION/DIVISION
     public static String multiplyLtoR(String exp){
 	if(exp.indexOf("*") != -1 || exp.indexOf("/") != -1){
 	    int opIndex = Math.min(exp.indexOf("*"),exp.indexOf("/"));
@@ -227,6 +236,7 @@ public class MathString {
 	}
     }//end multiplyLtoR
 
+    //addLtoR but with POWERS!!!
     public static String powerLtoR(String exp){
 	if(exp.indexOf("^") != -1){
 	    int opIndex = exp.indexOf("^");
@@ -283,7 +293,9 @@ public class MathString {
 	    return exp;
 	}
     }//end powerLtoR
-    
+
+
+    //Handles parentheses in a string.
     public static String evaluateParens(String exp) {
 	exp = exp.replace("~(","~1(");
 	while (exp.indexOf("(") != -1) {
@@ -312,6 +324,7 @@ public class MathString {
 	return exp;
     }
 
+    //runs all the functions
     public static String evaluateFuncs(String exp) {
 	exp = evaluateFunc(exp, "abs");
 	exp = evaluateFunc(exp, "sin");
@@ -320,6 +333,8 @@ public class MathString {
 	return exp;
     }
 
+    //takes an expression and runs the proper operation on whatever's inside the brackets of any function inside
+    //Eg: sin[], cos[], tan[], abs[]
     public static String evaluateFunc(String exp, String func) {
 	exp = exp.replace("~" + func + "[","~1" + func +"[");
 	while (exp.indexOf(func + "[") != -1) {
@@ -351,7 +366,8 @@ public class MathString {
 	}
 	return exp;
     }
-    
+
+    //helperMethod for finding closing brackets.
     public static int findClosingBracket(String exp, int open) {
 	int close = open;
 	int counter = 1;
@@ -368,6 +384,7 @@ public class MathString {
 	return close;
     }
 
+    //main expression evaluation function, runs operations in order. 
     public static String pemdas(String exp){
 	exp = exp.replace(" ", "");
 	//System.out.println(exp);
@@ -383,6 +400,7 @@ public class MathString {
 	return exp;
     }
 
+    //takes an equation and determines if both sides are equal.
     public static boolean isEqual(String eq){
 	int equalsIndex = eq.indexOf("=");
 	String lhs = eq.substring(0,equalsIndex);
@@ -392,7 +410,8 @@ public class MathString {
 
 	return (side1 == side2);
     }
-
+    
+    //takes an equation, subtracts one side from another, returns positive, negative, or zero depending on outcome.
     public static int subSides(String eq){
 	int equalsIndex = eq.indexOf("=");
 	String lhs = eq.substring(0,equalsIndex);
@@ -407,17 +426,19 @@ public class MathString {
 	    return 0;		
     }
 
- 
+    //substitutes a given variable for a given double value.
     public static String sub(String exp,String var, double val){
 	exp = exp.replace(var, "(" + negativeNotate("" + val) + ")");
 	//System.out.println(exp);
 	return exp;	
     }
 
+    //final variable numbers accessor
     public static String getNumbers() {
 	return numbers;
     }
 
+    //runs divZero on an equation
     public static boolean divZero(String eq) {
 	String lhs = eq.substring(0, eq.indexOf("="));
 	String rhs = eq.substring(eq.indexOf("=")+1);
@@ -425,6 +446,7 @@ public class MathString {
 	return divZeroExp(lhs) || divZeroExp(rhs);
     }
 
+    //determines if an expression CAN divide by zero
     public static boolean divZeroExp(String exp) {
 	int index = exp.indexOf("/");
 	while (index != -1) {
@@ -448,7 +470,9 @@ public class MathString {
 
 	return false;
     }
+
     
+    //finds closing paren: helper method
     public static int findClosingParen(String exp, int open) {
 	int close = open;
 	int counter = 1;
@@ -464,7 +488,9 @@ public class MathString {
 	}
 	return close;
     }
+
     
+    //main method for testing
     public static void main (String[] args){
 	System.out.println(divZero(args[0]));
     }

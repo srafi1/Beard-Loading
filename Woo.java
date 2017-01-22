@@ -1,7 +1,8 @@
 import cs1.Keyboard;
 
 public class Woo  {
-    
+
+    //main method runs program entirely
     public static void main(String[] args) {
 	System.out.println("Welcome to Line Forge!");
 	System.out.println("Enter an expression or equation to begin!");
