@@ -34,6 +34,10 @@ public class Woo  {
 	helpText += "status -- prints out information about the current state of the graph\n";
 	helpText += "          ie: zoom level, translations, equation\n";
 	helpText += "clear -- empties out the graph\n";
+	helpText += "Storing functions -- Store a funtion by using any letter from the alphabet\n";
+	helpText += "        exculding x,y,s,n. The syntax is letter[x] = expression.\n";
+	helpText += "     eg: f[x] = x + 2 or g[x] = x^2 \n";
+
 
 	boolean graphMode = false;
 	String eq = "";
@@ -41,7 +45,8 @@ public class Woo  {
 	double totaldx = 0;
 	double totaldy = 0;
 	String falpha = "a b c d e f g h i j k l m o p q r t u v w z";
-
+	//faplha are the letters eligible to be function names
+	
 	while (true) {
 	    System.out.print("What to do...? (input 'help' for help or 'quit' to exit)\n>");
 	    String input = "";

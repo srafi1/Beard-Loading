@@ -89,7 +89,7 @@ public class AxisGraph  {
 	refresh();
     }
 
-    //
+     //takes the input string, checks if it exist already in storage. If it does rewrite over that input, if not, add it to storage
     public void store(String eq){
 	String var = eq.substring(eq.indexOf("[x]")-1,eq.indexOf("[x]"));
 	for(int i = 0; i < storage.size(); i++){
@@ -103,7 +103,7 @@ public class AxisGraph  {
 
     }
 
-    //
+     //takes the function name, matches it with its corresponding place in storage, and returns the expression that was stored.
      public String function(String input){
 	 input = input.replace(" ", "");
 	while(input.indexOf("[x]") != -1){
@@ -115,13 +115,13 @@ public class AxisGraph  {
     }
     
 
-    //
+        //finds the letter name of the function
     public String findname(String input){
 	 String fname = input.substring(input.indexOf("[x]")-1,input.indexOf("[x]"));
 	 return fname;
     }
 
-    //
+        //finds the expression of the function with a certain name
     public String findexp(String name){
 	String exp = "";
 	for(int i = 0; i < storage.size(); i++){
@@ -137,41 +137,5 @@ public class AxisGraph  {
 
     public ArrayList<String> getGraphs() {
 	return graphs;
-    }
-
-    
-    
-    /*
-    public void setGraph(double cx, double cy, double scale) {
-	for (int y = 0; y < plane.length; y++)
-	    for (int x = 0; x < plane[0].length; x++) {
-		plane[y][x].scale(scale);
-		plane[y][x].translate(cx - 10, cy - 10);
-	    }
-    }
-
-    public void zoom(double scale) {
-	double[] coords = plane[10][10].getCor();
-	setGraph(coords[0], coords[1], scale);
-    }
-
-    public void centerAt(double cx, double cy) {
-	setGraph(cx, cy, 1);
-    }
-    */
-
-    //main method for testing
-    public static void main(String[] args) {
-	AxisGraph a = new AxisGraph();
-	/*	a.graphAll("y=x^2");
-	System.out.println(a);
-	a.graphAll("y=x");
-	System.out.println(a);
-	System.out.println(a.graphs);*/
-	a.storage.add("f[x] = x^2");
-	a.storage.add("g[x] = x + 1");
-	//	System.out.println(a.findexp("x"));
-	System.out.println(a.function("y = 3f[x]"));
-    }
-    
+    }    
 }
