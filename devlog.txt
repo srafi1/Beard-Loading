@@ -10,24 +10,25 @@ Line Forge
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-When we were evalutaing negative numbers, we kept on getting an index out of range when multiplying and dividing. However, it turned out that we forgot the ~ symbol in those two methods. So we made a global number variable instead so an error like this won't happen again. 
+When we were evaluating negative numbers, we kept on getting an index out of range when multiplying and dividing. However, it turned out that we forgot the ~ symbol in those two methods. So we made a global number variable instead so an error like this won't happen again. 
+In addition, we had problems with asymptotes and special case functions and were able to resolve most of them. 
 
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-None currently.
+Our tan[x] function has an issue when we graph it because the asymptotes do not graph properly. In addition, our graph does not seem to work on a windows command prompt. 
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Yet to  happen.
+MATH IS RAD. We also learned that when we need to graph curves, we need to approximate the points because the points on our graph have a limited range. In addition, we also learned a couple of String functions besides the ones in the Duke API that made manipulating Strings much easier.  
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-No changes in design.
- 
+We are happy to say that we have accomplished a substantial amount of the goals we set for ourselves. However, we had to scrap the idea of an equation solver and focus on tweaking the main part of Line Forge which was the graph. The graph gave us a lot of issues and we decided to move more resources toward perfecting it rather than making the equation solver. In addition, we wanted to add a special feature to the points where the points would match the slope line. For example, positive slope would be ^, slope of 0 would be - and a vertical slope would be |. However, we decided to simply make a * symbol for all points. 
+
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Still on the journey.
+A lot of what we learned focused on communicating, managing our code, and thinking algorithmically. We had to communicate to each other when we were working, what we were working on, and when we stopped working. This was crucial because if we didn't do this, we would get merge errors and waste time trying to fix the problem. We also found that using the correct terminology helped us communicate ideas faster. During developing, we thanked the CS gods for System.out.println() because it helped us see exactly what was going on in each specific part of our code. In addition, we learned that we could make life easier for us by implementing a main method in other classes for testing purposes. This would allow us to test individual functions without the hassle of having to go through the driver class.  
 
 
 
@@ -58,15 +59,55 @@ Mansour Elsharawy :: I worked on the flowchart and started MathString in order t
 2017-1-11
 --------------------------------------------------------------
 Shakil Rafi :: I worked on parenthesis evaluation with Ish and cleaned up MathString. I started the driver file to lay out the general input structure.
-Ishtiaque Mahdi :: I worked on parenthesis evalutaion with Shakil and did technical stuff like add cs1 folder, overwrite .gitignore, and devlog. I also made the absolute value evaluator. 
+Ishtiaque Mahdi :: I worked on parenthesis evaluation with Shakil and did technical stuff like add cs1 folder, overwrite .gitignore, and devlog. I also made the absolute value evaluator. 
 Mansour Elsharawy :: I worked on the devlog and made the equality checker function and edited the absolute value evaluator.
 ==============================================================
 
 2017-1-12
 --------------------------------------------------------------
-Shakil Rafi and Mansour Elsharawy :: worked on a new graphing algorithm to account for cases where the equation didn't land exactly on a point
-Shakil Rafi :: worked on expanding the driver file to include equation inputs for graphing and worked on the driver file to allow modifying the view of the graph with zoom and translate
-Mansour ELsharawy :: worked on functions in AxisGraph to properly handle zooming and graphing
-Ishtiaque Mahdi :: worked on UML diagram, flowchart, and helped out with algorithmic thinking in other sections.
+Shakil Rafi and Mansour Elsharawy :: Worked on a new graphing algorithm to account for cases where the equation didn't land exactly on a point.
+Shakil Rafi :: Worked on expanding the driver file to include equation inputs for graphing and worked on the driver file to allow modifying the view of the graph with zoom and translate.
+Mansour ELsharawy :: Worked on functions in AxisGraph to properly handle zooming and graphing.
+Ishtiaque Mahdi :: Worked on UML diagram, flowchart, and helped out with algorithmic thinking in other sections.
+==============================================================
+
+
+2017-1-13 : 2017-1-15
+--------------------------------------------------------------
+Shakil Rafi & Mansour Elsharawy :: Worked on fixing the asymptotes problem. 
+Ishtiaque Mahdi :: Started working on sin, cos, and tan functions. 
+
+==============================================================
+
+2017-1-16
+--------------------------------------------------------------
+Everyone ::  Sin, cos, tan functions were giving values but not graphing. Worked on finding a solution. 
+==============================================================
+
+2017-1-17
+--------------------------------------------------------------
+Everyone :: Opened and closed an issue on github. 
+Shakil Rafi & Mansour Elsharawy :: Worked on debugging a problem in the graph.
+Ishtiaque Mahdi :: Modified README
+==============================================================
+
+2017-1-18
+--------------------------------------------------------------
+Everyone :: An error occurred and our graphs were not working. However, we were already two commits ahead. Panic ensued because we could not find the problem but P-Chan saved us. We then worked on making the driver file more intuitive based on Mr.Brown, P-Chan, and other students recommendations. 
+==============================================================
+
+2017-1-19
+--------------------------------------------------------------
+Shakil Rafi :: Worked on debugging the asymptote problem and more functions started graphing correctly.  
+Ishtiaque Mahdi :: Started to work on storing and graphing stored functions.
+Mansour Elsharawy :: Started working on multiple graphs function. 
+==============================================================
+
+2017-1-20 : 2017-1-22
+--------------------------------------------------------------
+Everyone :: Adding comments, final touches, general debugging. 
+Shakil Rafi :: Added colors to graph and worked on debugging asymptotes. 
+Ishtiaque Mahdi :: Finished storing and graphing stored functions. 
+Mansour Elsharawy :: Worked on the clearing function and graphing multiple functions. 
 ==============================================================
 
