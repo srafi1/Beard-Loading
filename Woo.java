@@ -69,13 +69,16 @@ public class Woo  {
 	    else if (graphMode && input.indexOf("zoom") == 0) {
 		//zoom
 		try {
-		    double scale = Double.parseDouble(input.substring(5));
-		    graph.zoom(scale);
-		    graph.translate(totaldx, totaldy);
-		    graph.graphAll();
-		    highVal = scale;
-		    System.out.println(graph);
-		    System.out.println("Use 'status' to see the equations, zoom level, and translations");
+		    double scale = MathString.notateToDouble(input.substring(5));
+		    if (scale > 0) {
+			graph.zoom(scale);
+			graph.translate(totaldx, totaldy);
+			graph.graphAll();
+			highVal = scale;
+			System.out.println(graph);
+			System.out.println("Use 'status' to see the equations, zoom level, and translations");
+		    } else
+			System.out.println("Scale must be greater than 0");
 		} catch (Exception e) {
 		    //e.printStackTrace();
 		    System.out.println("Use zoom in the format: zoom [scale]");
@@ -85,8 +88,8 @@ public class Woo  {
 		try {
 		    String params = input.substring(10);
 		    String[] coords = params.split(" ");
-		    double dx = Double.parseDouble(coords[0]);
-		    double dy = Double.parseDouble(coords[1]);
+		    double dx = MathString.notateToDouble(coords[0]);
+		    double dy = MathString.notateToDouble(coords[1]);
 
 		    graph.translate(dx, dy);
 		    graph.graphAll();
