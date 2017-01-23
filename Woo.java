@@ -37,6 +37,10 @@ public class Woo  {
 	helpText += "Storing functions -- Store a funtion by using any letter from the alphabet\n";
 	helpText += "        exculding x,y,s,n. The syntax is letter[x] = expression.\n";
 	helpText += "     eg: f[x] = x + 2 or g[x] = x^2 \n";
+	helpText += "Additional Functions -- sin[x], cos[x], tan[x] and abs[x] are \n"; 
+	helpText += "                        all valid functions that can be graphed and evaluated.\n ";
+	helpText += "     eg: y = sin[x] : will graph the sin function.\n";
+	helpText += "     eg: sin[20] : will return the value .9129452507276277\n";
 
 
 	boolean graphMode = false;
