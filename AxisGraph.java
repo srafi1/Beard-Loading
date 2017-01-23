@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class AxisGraph  {
     private Point[][] plane;
     private double highest;
-    public ArrayList<String> graphs = new ArrayList<String>();
-    public ArrayList<String> storage = new ArrayList<String>();
+    private ArrayList<String> graphs = new ArrayList<String>();
+    private ArrayList<String> storage = new ArrayList<String>();
 
     //constructor method, makes a 41 by 41 array of Points and autozooms to 10
     public AxisGraph() {

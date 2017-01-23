@@ -1,3 +1,5 @@
+//All ANSI excae codes to incorporate colors in the terminal
+//These are kept in a separate file to be able to access them from anywhere
 public interface ANSI {
     public static final String RESET = "\u001B[0m";
     public static final String WHITE = "\u001B[37m";
