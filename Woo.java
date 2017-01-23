@@ -1,4 +1,5 @@
 import cs1.Keyboard;
+import java.util.ArrayList;
 
 public class Woo  {
 
@@ -29,10 +30,10 @@ public class Woo  {
 	helpText += "    eg: input: translate 1 -2\n";
 	helpText += "        output: moves graph 1 point left and 2 down\n";
 	helpText += "reset -- reverts graph back to original settings\n";
-	helpText += "         ie: (zoom 20, no translations)\n";
+	helpText += "         ie: (zoom 10, no translations)\n";
 	helpText += "status -- prints out information about the current state of the graph\n";
 	helpText += "          ie: zoom level, translations, equation\n";
-	helpText += "NOTE: Use '~' instead of '-' for negative numbers\n";
+	helpText += "clear -- empties out the graph\n";
 
 	boolean graphMode = false;
 	String eq = "";
@@ -43,7 +44,13 @@ public class Woo  {
 
 	while (true) {
 	    System.out.print("What to do...? (input 'help' for help or 'quit' to exit)\n>");
-	    String input = in.readString();
+	    String input = "";
+	    try {
+		input = fixInput(in.readString());
+	    } catch (Exception e) {
+		System.out.println("Bad input");
+		continue;
+	    }
 
 	    if (input.indexOf("[x]") != -1 && (falpha.contains(input.substring(input.indexOf("[x]")-1,input.indexOf("[x]")))) && (input.indexOf("y") != -1)){
 		input = graph.function(input);
@@ -60,11 +67,12 @@ public class Woo  {
 		    double scale = Double.parseDouble(input.substring(5));
 		    graph.zoom(scale);
 		    graph.translate(totaldx, totaldy);
-		    graph.graphAll(eq);
+		    graph.graphAll();
 		    highVal = scale;
 		    System.out.println(graph);
+		    System.out.println("Use 'status' to see the equations, zoom level, and translations");
 		} catch (Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    System.out.println("Use zoom in the format: zoom [scale]");
 		}
 	    } else if (graphMode && input.indexOf("translate") == 0) {
@@ -76,34 +84,64 @@ public class Woo  {
 		    double dy = Double.parseDouble(coords[1]);
 
 		    graph.translate(dx, dy);
-		    graph.graphAll(eq);
+		    graph.graphAll();
 
 		    totaldx += dx;
 		    totaldy += dy;
 
 		    System.out.println(graph);
+		    System.out.println("Use 'status' to see the equations, zoom level, and translations");
 		} catch (Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    System.out.println("Use translate in the format: translate [change in x] [change in y]");
 		}
 	    } else if (graphMode && input.indexOf("reset") == 0) {
 		graph.translate(-1*totaldx, -1*totaldy);
 		graph.zoom(10);
-		graph.graphAll(eq);
+		graph.graphAll();
 		totaldx = 0;
 		totaldy = 0;
-		highVal = 20;
+		highVal = 10;
 		System.out.println(graph);
 	    } else if (input.equals("status")) {
-		System.out.println("Equations: " + graph.graphs);
-		System.out.println("Graph mode: " + graphMode);
+		System.out.println("Equations: ");
+		ArrayList<String> graphs = graph.getGraphs();
+		String myColor = "";
+		for (int i = 0; i < graphs.size(); i++) {
+		    switch (i%7) {
+		    case 0:
+			myColor = ANSI.WHITE;
+			break;
+		    case 1:
+			myColor = ANSI.RED;
+			break;
+		    case 2:
+			myColor = ANSI.GREEN;
+			break;
+		    case 3:
+			myColor = ANSI.YELLOW;
+			break;
+		    case 4:
+			myColor = ANSI.BLUE;
+			break;
+		    case 5:
+			myColor = ANSI.PURPLE;
+			break;
+		    case 6:
+			myColor = ANSI.CYAN;
+			break;			
+		    }
+		    System.out.print(myColor);
+		    System.out.print(graphs.get(i));
+		    System.out.println(ANSI.RESET);
+		}
 		System.out.println("Zoom level: " + highVal);
 		System.out.println("Total translations: " + totaldx + " " + totaldy);
 	    } else if (input.equals("clear")) {
 		graph.clear();
 		System.out.println("Graph cleared!");
 
-	    }else if (input.indexOf("[x]") != -1 && input.indexOf("] =") != -1 || input.indexOf("]=") != -1 && input.indexOf("=") != -1){
+	    } else if (input.indexOf("[x]") != -1 && input.indexOf("] =") != -1 || input.indexOf("]=") != -1 && input.indexOf("=") != -1){
 		try{
 		    input = input.replace("X","x");
 		    input = input.replace("Y","y");
@@ -113,16 +151,19 @@ public class Woo  {
 			input = input.substring(0,input.indexOf("="));
 		    }
 
-		    //	String name = input.substring(0,input.indexOf("="));
-		    //	System.out.println(name);
-
 		    graph.graphAll("y = " + input);
 
 		    System.out.println(graph);
-		    graphMode = true;
-		    System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
+		    if (!graphMode) {
+			graphMode = true;
+			System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
+		    } else if (graph.getGraphs().size() > 1) {
+			System.out.println("Use 'clear' empty the graph");
+		    } else if (graph.getGraphs().size() > 3) {
+			System.out.println("You can store functions using the format 'f(x)=...' for later use");
+		    }
 		} catch (Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    System.out.println("The function: " + input + " is invalid.");
 		    System.out.println();
 		}				    
@@ -136,18 +177,24 @@ public class Woo  {
 		    graph.graphAll(input);
 
 		    System.out.println(graph);
-		    graphMode = true;
-		    System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
+		    if (!graphMode) {
+			graphMode = true;
+			System.out.println("Now you can use the 'zoom [scale]' and 'translate [x] [y]' commands");
+		    } else if (graph.getGraphs().size() > 3) {
+			System.out.println("You can store functions using the format 'f(x)=...' for later use");
+		    } else if (graph.getGraphs().size() > 1) {
+			System.out.println("Use 'clear' empty the graph");
+		    }
 		} catch (Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    System.out.println("The equation: " + input + " is invalid. Make sure it includes at least one x or y");
 		    System.out.println();
 		}
 	    } else {
 		try {
-		    System.out.println(MathString.pemdas(input));
+		    System.out.println(MathString.pemdas(input).replace("~", "-"));
 		} catch(Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
 		    System.out.println("The expression: " + input + " is invalid");
 		    if (input.indexOf("--") != -1)
 			System.out.println("Remember: use '~' for negative numbers instead of '-'");
@@ -156,5 +203,38 @@ public class Woo  {
 	    System.out.println();
 	}
     }
-    
+
+
+    public static String fixInput(String input) {
+	int index = -1;
+	String nums = MathString.getNumbers()+"xy";
+	
+	while (input.indexOf('-', index + 1) != -1) {
+	    index = input.indexOf('-', index + 1);
+	    if (index == 0 || nums.indexOf(input.charAt(index-1)) == -1) {
+		if (input.length() > index)
+		    input = input.substring(0, index) + "~" + input.substring(index+1);
+		else
+		    input = input.substring(0, index);
+	    }
+	}
+
+	index = 0;
+	while (input.indexOf('(', index + 1) != -1) {
+	    index = input.indexOf('(', index + 1);
+	    int close = MathString.findClosingParen(input, index);
+	    if (index > 0 && (nums+"-+/*").indexOf(input.charAt(index - 1)) == -1) {
+		if (input.length() > index)
+		    input = input.substring(0, index) + "[" + input.substring(index+1);
+		else
+		    input = input.substring(0, index);
+		if (input.length() > close)
+		    input = input.substring(0, close) + "]" + input.substring(close+1);
+		else
+		    input = input.substring(0, close);
+	    }
+	}
+	
+	return input;
+    }
 }

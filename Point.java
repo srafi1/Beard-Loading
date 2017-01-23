@@ -63,6 +63,8 @@ public class Point{
 
     //sets myColor variable using ANSI codes
     public void setColor(int graphNum) {
+	graphNum = graphNum % 7;
+	
 	switch (graphNum) {
 	case 0:
 	    myColor = ANSI.WHITE;

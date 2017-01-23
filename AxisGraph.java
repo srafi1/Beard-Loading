@@ -29,7 +29,6 @@ public class AxisGraph  {
 	return retStr;
     }
 
-
     //zoom determines the spacing of each point given the highest values of both x and y
     public void zoom(double highVal){
 	double increment = highVal / ((plane.length - 1) / 2.0);
@@ -65,6 +64,10 @@ public class AxisGraph  {
     //graphs new given equation as well as all of the previous ones for graph overlay.
     public void graphAll(String eq){
 	graphs.add(eq);
+	graphAll();
+    }
+
+    public void graphAll() {
 	for(int x = 0; x < graphs.size();x++)
 	    graph(graphs.get(x), x);
     }
@@ -87,18 +90,6 @@ public class AxisGraph  {
     }
 
     //
-    public String whitespace(String input){
-	while ( input.indexOf(" ") != -1){
-	    String part1 = input.substring(0,input.indexOf(" "));
-
-	    String part2 = input.substring(input.indexOf(" ")+1);
-
-	    input = part1 + part2;
-	}
-	return input;
-    }
-
-    //
     public void store(String eq){
 	String var = eq.substring(eq.indexOf("[x]")-1,eq.indexOf("[x]"));
 	for(int i = 0; i < storage.size(); i++){
@@ -114,7 +105,7 @@ public class AxisGraph  {
 
     //
      public String function(String input){
-	 input = whitespace(input);
+	 input = input.replace(" ", "");
 	while(input.indexOf("[x]") != -1){
 	    String var = findname(input);
 	    String replaced = input.substring(input.indexOf("[x]")-1, input.indexOf("[x]")+3);
@@ -142,6 +133,10 @@ public class AxisGraph  {
 	    }
 	}
 	return exp;
+    }
+
+    public ArrayList<String> getGraphs() {
+	return graphs;
     }
 
     
