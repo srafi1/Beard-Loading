@@ -13,10 +13,10 @@ Line Forge is a program that functions like a graphing  calculator. The main pur
 
 
 ##Features
--Simplify expressions
--Graph equations
--Graph multiple equations together (distinguished by different colors)
--Zoom in/out in the graph
--Move around the view of the graph (with translate)
--Store functions
--Trig functions and absolute value
+- Simplify expressions
+- Graph equations
+- Graph multiple equations together (distinguished by different colors)
+- Zoom in/out in the graph
+- Move around the view of the graph (with translate)
+- Store functions
+- Trig functions and absolute value
