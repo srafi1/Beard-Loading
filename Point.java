@@ -220,14 +220,4 @@ public class Point{
 	checkAxis();
     }
 
-
-    //main method for testing
-    public static void main(String[] args) {
-	Point p = new Point(Double.parseDouble(args[0]), Double.parseDouble(args[1]));
-	
-	String eq = "y=1/x";
-	p.closeEnough(eq, Double.parseDouble(args[2]));
-	System.out.println(p);
-    }
-
 }

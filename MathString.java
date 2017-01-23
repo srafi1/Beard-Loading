@@ -18,27 +18,7 @@ public class MathString {
 	else
 	    return Double.parseDouble(negNum);
     }
-    
-    /*
-      public static double notateToDouble(String negNum){
-      int mult = 1;
-      if (negNum.substring(0,1).equals("~")){
-      negNum = negNum.substring(1);
-      mult = -1;
-      }
-	
-      if (negNum.indexOf("E") != -1 && false) {
-      int eIndex = negNum.indexOf("E");
-      int baseIndex = Math.min(eIndex, 10);
-      double  base = Double.parseDouble(negNum.substring(0, baseIndex));
-      if (negNum.substring(eIndex+1).equals(""))
-      negNum = negNum + "1";
-      double power = Double.parseDouble(negNum.substring(eIndex+1));
-      return base*Math.pow(10, power)*mult;
-      }
-      return mult * Double.parseDouble(negNum);
-      }
-    */
+
 
     //performs a simple addition of a string (Eg: "5+4") and returns string representation of answer.
     public static String simpleAdd(String exp){
@@ -488,11 +468,4 @@ public class MathString {
 	}
 	return close;
     }
-
-    
-    //main method for testing
-    public static void main (String[] args){
-	System.out.println(divZero(args[0]));
-    }
-
 }
